@@ -179,9 +179,18 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\HerramientaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\PrivilegioController.cs" />
+    <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\ServicioController.cs" />
+    <Compile Include="Controllers\TecnicoController.cs" />
+    <Compile Include="Controllers\TipoServicioController.cs" />
+    <Compile Include="Controllers\UnidadHerramientaController.cs" />
+    <Compile Include="Controllers\UnidadMaterialController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -189,8 +198,38 @@
     <Compile Include="Models\area.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\asignar_rol_usuario.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\control.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\detalle_ficha_herramienta.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\detalle_ficha_material.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\detalle_reserva.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\detalle_servicio.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\direccion.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ficha_tecnica.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\herramienta.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\material.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Modelo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -206,7 +245,40 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Modelo.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\persona.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\privilegio.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\reserva.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rol.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\servicio.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tecnico.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tecnico_area.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\telefono.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tipo_servicio.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\unidad_herramienta.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\unidad_material.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usuario.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -229,6 +301,7 @@
       <DependentUpon>Modelo.edmx</DependentUpon>
       <LastGenOutput>Modelo.cs</LastGenOutput>
     </Content>
+    <Content Include="Resources\images\favicon.ico" />
     <Content Include="Resources\images\multiservis.png" />
     <Content Include="Resources\plugins\css\style.css" />
     <Content Include="Resources\plugins\datatable\css\jquery.dataTables.min.css" />
@@ -242,12 +315,18 @@
     <Content Include="Resources\plugins\fontello\css\fontello.css" />
     <Content Include="Resources\plugins\fontello\demo.html" />
     <Content Include="Resources\plugins\fontello\font\fontello.svg" />
-    <Content Include="Resources\plugins\jquery\jquery-1.10.2.js" />
-    <Content Include="Resources\plugins\jquery\jquery-1.11.2.min.js" />
     <Content Include="Resources\plugins\jquery\jquery-3.2.1.min.js" />
     <Content Include="Resources\plugins\jquery\jquery.numeric.js" />
+    <Content Include="Resources\plugins\js\herramienta.js" />
+    <Content Include="Resources\plugins\js\privilegio.js" />
+    <Content Include="Resources\plugins\js\rol.js" />
+    <Content Include="Resources\plugins\js\material.js" />
+    <Content Include="Resources\plugins\js\tecnico.js" />
+    <Content Include="Resources\plugins\js\unidad_material.js" />
+    <Content Include="Resources\plugins\js\unidad_herramienta.js" />
     <Content Include="Resources\plugins\js\servicio.js" />
     <Content Include="Resources\plugins\js\area.js" />
+    <Content Include="Resources\plugins\js\tiposervicio.js" />
     <Content Include="Resources\plugins\materialize\css\materialize.css" />
     <Content Include="Resources\plugins\materialize\js\init.js" />
     <Content Include="Resources\plugins\materialize\js\materialize.js" />
@@ -296,7 +375,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -332,9 +413,18 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Area\Index.cshtml" />
     <Content Include="Views\Servicio\Index.cshtml" />
+    <Content Include="Views\TipoServicio\Index.cshtml" />
+    <Content Include="Views\Rol\Index.cshtml" />
+    <Content Include="Views\Privilegio\Index.cshtml" />
+    <Content Include="Views\Material\Index.cshtml" />
+    <Content Include="Views\Herramienta\Index.cshtml" />
+    <Content Include="Views\UnidadHerramienta\Index.cshtml" />
+    <Content Include="Views\UnidadMaterial\Index.cshtml" />
+    <Content Include="Views\Tecnico\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Usuario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

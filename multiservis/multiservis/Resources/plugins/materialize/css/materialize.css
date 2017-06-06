@@ -1025,11 +1025,11 @@ overflow-x:auto;
 }
 
 .teal.lighten-1 {
-  background-color: #01579b !important;
+  background-color: #26a69a !important;
 }
 
 .teal-text.text-lighten-1 {
-  color: #01579b !important;
+  color: #26a69a !important;
 }
 
 .teal.darken-1 {
@@ -5749,8 +5749,8 @@ button.btn-floating {
 }
 
 .chips .chip.selected {
-  background-color: #01579b;
-  color: #fff;
+background-color: #01579b;
+color: #fff;
 }
 
 .chips .input {

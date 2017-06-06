@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="multiservisModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="area">
+    <Key>
+      <PropertyRef Name="id_area" />
+    </Key>
+    <Property Name="id_area" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_area" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="direccion">
+    <Key>
+      <PropertyRef Name="id_direccion" />
+    </Key>
+    <Property Name="id_direccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="personaD" Type="int" Nullable="false" />
+    <Property Name="direccionfija" Type="varchar" MaxLength="80" Nullable="false" />
+    <Property Name="zona" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="barrio" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="calle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="persona">
+    <Key>
+      <PropertyRef Name="id_persona" />
+    </Key>
+    <Property Name="id_persona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ci" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="paterno" Type="varchar" MaxLength="50" />
+    <Property Name="materno" Type="varchar" MaxLength="50" />
+    <Property Name="direccion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nacionalidad" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="privilegio">
+    <Key>
+      <PropertyRef Name="id_privilegio" />
+    </Key>
+    <Property Name="id_privilegio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rool" Type="int" Nullable="false" />
+    <Property Name="nombre__privilegio" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rol">
+    <Key>
+      <PropertyRef Name="id_rol" />
+    </Key>
+    <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_rol" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="servicio">
+    <Key>
+      <PropertyRef Name="id_servicio" />
+    </Key>
+    <Property Name="id_servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="area" Type="int" Nullable="false" />
+    <Property Name="nombre_servicio" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tecnico">
+    <Key>
+      <PropertyRef Name="id_tecnico" />
+    </Key>
+    <Property Name="id_tecnico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="personaTec" Type="int" Nullable="false" />
+    <Property Name="nroseguro" Type="int" Nullable="false" />
+    <Property Name="salario" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="fechainscripcion" Type="date" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="telefono">
+    <Key>
+      <PropertyRef Name="id_telefono" />
+    </Key>
+    <Property Name="id_telefono" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="personaT" Type="int" Nullable="false" />
+    <Property Name="tipo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="numero" Type="int" Nullable="false" />
+    <Property Name="estafo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tiposervicio">
+    <Key>
+      <PropertyRef Name="id_tiposervicio" />
+    </Key>
+    <Property Name="id_tiposervicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_tipo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="personaU" Type="int" Nullable="false" />
+    <Property Name="nombreusuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pasword" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="direccion_ibfk_1">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="direccion" Type="Self.direccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id_persona" />
+      </Principal>
+      <Dependent Role="direccion">
+        <PropertyRef Name="personaD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="privilegio_ibfk_1">
+    <End Role="rol" Type="Self.rol" Multiplicity="1" />
+    <End Role="privilegio" Type="Self.privilegio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rol">
+        <PropertyRef Name="id_rol" />
+      </Principal>
+      <Dependent Role="privilegio">
+        <PropertyRef Name="rool" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="servicio_ibfk_1">
+    <End Role="area" Type="Self.area" Multiplicity="1" />
+    <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="area">
+        <PropertyRef Name="id_area" />
+      </Principal>
+      <Dependent Role="servicio">
+        <PropertyRef Name="area" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tecnico_ibfk_1">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="tecnico" Type="Self.tecnico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id_persona" />
+      </Principal>
+      <Dependent Role="tecnico">
+        <PropertyRef Name="personaTec" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="telefono_ibfk_1">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="telefono" Type="Self.telefono" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id_persona" />
+      </Principal>
+      <Dependent Role="telefono">
+        <PropertyRef Name="personaT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="usuario_ibfk_1">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id_persona" />
+      </Principal>
+      <Dependent Role="usuario">
+        <PropertyRef Name="personaU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="multiservisModelStoreContainer">
+    <EntitySet Name="area" EntityType="Self.area" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="direccion" EntityType="Self.direccion" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="persona" EntityType="Self.persona" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="privilegio" EntityType="Self.privilegio" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="rol" EntityType="Self.rol" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="servicio" EntityType="Self.servicio" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="tecnico" EntityType="Self.tecnico" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="telefono" EntityType="Self.telefono" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="tiposervicio" EntityType="Self.tiposervicio" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" Schema="multiservis" store:Type="Tables" />
+    <AssociationSet Name="direccion_ibfk_1" Association="Self.direccion_ibfk_1">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="direccion" EntitySet="direccion" />
+    </AssociationSet>
+    <AssociationSet Name="privilegio_ibfk_1" Association="Self.privilegio_ibfk_1">
+      <End Role="rol" EntitySet="rol" />
+      <End Role="privilegio" EntitySet="privilegio" />
+    </AssociationSet>
+    <AssociationSet Name="servicio_ibfk_1" Association="Self.servicio_ibfk_1">
+      <End Role="area" EntitySet="area" />
+      <End Role="servicio" EntitySet="servicio" />
+    </AssociationSet>
+    <AssociationSet Name="tecnico_ibfk_1" Association="Self.tecnico_ibfk_1">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="tecnico" EntitySet="tecnico" />
+    </AssociationSet>
+    <AssociationSet Name="telefono_ibfk_1" Association="Self.telefono_ibfk_1">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="telefono" EntitySet="telefono" />
+    </AssociationSet>
+    <AssociationSet Name="usuario_ibfk_1" Association="Self.usuario_ibfk_1">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="multiservisModelStoreContainer" CdmEntityContainer="multiservisEntities">
+    <EntitySetMapping Name="area">
+      <EntityTypeMapping TypeName="multiservisModel.area">
+        <MappingFragment StoreEntitySet="area">
+          <ScalarProperty Name="id_area" ColumnName="id_area" />
+          <ScalarProperty Name="nombre_area" ColumnName="nombre_area" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="direccion">
+      <EntityTypeMapping TypeName="multiservisModel.direccion">
+        <MappingFragment StoreEntitySet="direccion">
+          <ScalarProperty Name="id_direccion" ColumnName="id_direccion" />
+          <ScalarProperty Name="personaD" ColumnName="personaD" />
+          <ScalarProperty Name="direccionfija" ColumnName="direccionfija" />
+          <ScalarProperty Name="zona" ColumnName="zona" />
+          <ScalarProperty Name="barrio" ColumnName="barrio" />
+          <ScalarProperty Name="calle" ColumnName="calle" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="persona">
+      <EntityTypeMapping TypeName="multiservisModel.persona">
+        <MappingFragment StoreEntitySet="persona">
+          <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+          <ScalarProperty Name="ci" ColumnName="ci" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="paterno" ColumnName="paterno" />
+          <ScalarProperty Name="materno" ColumnName="materno" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="nacionalidad" ColumnName="nacionalidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="privilegio">
+      <EntityTypeMapping TypeName="multiservisModel.privilegio">
+        <MappingFragment StoreEntitySet="privilegio">
+          <ScalarProperty Name="id_privilegio" ColumnName="id_privilegio" />
+          <ScalarProperty Name="rool" ColumnName="rool" />
+          <ScalarProperty Name="nombre__privilegio" ColumnName="nombre__privilegio" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rol">
+      <EntityTypeMapping TypeName="multiservisModel.rol">
+        <MappingFragment StoreEntitySet="rol">
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicio">
+      <EntityTypeMapping TypeName="multiservisModel.servicio">
+        <MappingFragment StoreEntitySet="servicio">
+          <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+          <ScalarProperty Name="area" ColumnName="area" />
+          <ScalarProperty Name="nombre_servicio" ColumnName="nombre_servicio" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tecnico">
+      <EntityTypeMapping TypeName="multiservisModel.tecnico">
+        <MappingFragment StoreEntitySet="tecnico">
+          <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
+          <ScalarProperty Name="personaTec" ColumnName="personaTec" />
+          <ScalarProperty Name="nroseguro" ColumnName="nroseguro" />
+          <ScalarProperty Name="salario" ColumnName="salario" />
+          <ScalarProperty Name="fechainscripcion" ColumnName="fechainscripcion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="telefono">
+      <EntityTypeMapping TypeName="multiservisModel.telefono">
+        <MappingFragment StoreEntitySet="telefono">
+          <ScalarProperty Name="id_telefono" ColumnName="id_telefono" />
+          <ScalarProperty Name="personaT" ColumnName="personaT" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="numero" ColumnName="numero" />
+          <ScalarProperty Name="estafo" ColumnName="estafo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tiposervicio">
+      <EntityTypeMapping TypeName="multiservisModel.tiposervicio">
+        <MappingFragment StoreEntitySet="tiposervicio">
+          <ScalarProperty Name="id_tiposervicio" ColumnName="id_tiposervicio" />
+          <ScalarProperty Name="nombre_tipo" ColumnName="nombre_tipo" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="multiservisModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="personaU" ColumnName="personaU" />
+          <ScalarProperty Name="nombreusuario" ColumnName="nombreusuario" />
+          <ScalarProperty Name="pasword" ColumnName="pasword" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

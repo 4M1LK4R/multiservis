@@ -25,7 +25,7 @@
  */
 $.fn.numeric = function(decimal, callback)
 {
-	decimal = (decimal === false) ? "" : decimal || ".";
+	decimal = (decimal === false) ? "" : decimal || ",";
 	callback = typeof callback == "function" ? callback : function(){};
 	return this.data("numeric.decimal", decimal).data("numeric.callback", callback).keypress($.fn.numeric.keypress).blur($.fn.numeric.blur);
 }
@@ -140,4 +140,3 @@ $.fn.removeNumeric = function()
 }
 
 })(jQuery);
-console.log('jquery.numeric.js');

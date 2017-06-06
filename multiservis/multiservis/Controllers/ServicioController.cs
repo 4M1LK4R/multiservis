@@ -48,7 +48,7 @@ namespace multiservis.Controllers
             cadena += "</table>";
             return Json(cadena, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Guardar(int id,int area, string nombre, bool estado)
+        public ActionResult Guardar(int id, int area, string nombre, bool estado)
         {
             servicio obj;
             string error = "";
@@ -94,17 +94,23 @@ namespace multiservis.Controllers
         }
         public ActionResult Delete(int id)
         {
-            servicio obj = BD.servicio.Single(o => o.id == id);
-            BD.servicio.Remove(obj);
-            BD.SaveChanges();
-            return Json(null, JsonRequestBehavior.AllowGet);
+            try
+            {
+                servicio obj = BD.servicio.Single(o => o.id == id);
+                BD.servicio.Remove(obj);
+                BD.SaveChanges();
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
         }
-
-        public ActionResult ListarAreas()
+        public ActionResult ListarSelectServicios()
         {
-            string cadena = "<select id='selectArea'>";
-            cadena += "<option value='' disabled selected>Seleccionar servicio</option>";
-            foreach (var item in BD.area.ToList().Where(o => o.estado))
+            string cadena = "<select id='selectServicio'>";
+            cadena += "<option value='' disabled selected>(Seleccionar Servicio)</option>";
+            foreach (var item in BD.servicio.ToList().Where(o => o.estado))
             {
                 cadena += "<option value=" + item.id + ">" + item.nombre + "</option>";
             }

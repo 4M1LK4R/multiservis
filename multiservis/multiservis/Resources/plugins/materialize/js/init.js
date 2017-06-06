@@ -5,7 +5,6 @@ $("#AbriMenu").click(function () {
     $('.button-collapse').sideNav('show');
 });
 $(document).ready(function () {
-    console.log('Init Materialize');
     $('.modal').modal();
     $('.parallax').parallax();
     $('.button-collapse').sideNav();
@@ -17,9 +16,7 @@ $(document).ready(function () {
     $('.scrollspy').scrollSpy();
     $('input#input_text, textarea#descripcionTema').characterCounter();
     $('.datepicker').pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 2 // Creates a dropdown of 15 years to control year
+        selectMonths: true,
+        selectYears: 2
     });
 });
-
-console.log('init.js');

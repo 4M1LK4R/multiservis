@@ -91,10 +91,28 @@ namespace multiservis.Controllers
         }
         public ActionResult Delete(int id)
         {
-            area obj = BD.area.Single(o => o.id == id);
-            BD.area.Remove(obj);
-            BD.SaveChanges();
-            return Json(null, JsonRequestBehavior.AllowGet);
+            try
+            {
+                area obj = BD.area.Single(o => o.id == id);
+                BD.area.Remove(obj);
+                BD.SaveChanges();
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult ListarSelectAreas()
+        {
+            string cadena = "<select id='selectArea'>";
+            cadena += "<option value='' disabled selected>(Seleccionar area)</option>";
+            foreach (var item in BD.area.ToList().Where(o => o.estado))
+            {
+                cadena += "<option value=" + item.id + ">" + item.nombre + "</option>";
+            }
+            cadena += "</select>";
+            return Json(cadena, JsonRequestBehavior.AllowGet);
         }
     }
 }

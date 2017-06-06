@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="multiservisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="area">
+    <Key>
+      <PropertyRef Name="id_area" />
+    </Key>
+    <Property Name="id_area" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="servicio" Relationship="Self.servicio_ibfk_1" FromRole="area" ToRole="servicio" />
+  </EntityType>
+  <EntityType Name="direccion">
+    <Key>
+      <PropertyRef Name="id_direccion" />
+    </Key>
+    <Property Name="id_direccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="personaD" Type="Int32" Nullable="false" />
+    <Property Name="direccionfija" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="zona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="calle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="persona" Relationship="Self.direccion_ibfk_1" FromRole="direccion" ToRole="persona" />
+  </EntityType>
+  <EntityType Name="persona">
+    <Key>
+      <PropertyRef Name="id_persona" />
+    </Key>
+    <Property Name="id_persona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ci" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="paterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="materno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nacionalidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="direccion1" Relationship="Self.direccion_ibfk_1" FromRole="persona" ToRole="direccion" />
+    <NavigationProperty Name="tecnico" Relationship="Self.tecnico_ibfk_1" FromRole="persona" ToRole="tecnico" />
+    <NavigationProperty Name="telefono" Relationship="Self.telefono_ibfk_1" FromRole="persona" ToRole="telefono" />
+    <NavigationProperty Name="usuario" Relationship="Self.usuario_ibfk_1" FromRole="persona" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="privilegio">
+    <Key>
+      <PropertyRef Name="id_privilegio" />
+    </Key>
+    <Property Name="id_privilegio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rool" Type="Int32" Nullable="false" />
+    <Property Name="nombre__privilegio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="rol" Relationship="Self.privilegio_ibfk_1" FromRole="privilegio" ToRole="rol" />
+  </EntityType>
+  <EntityType Name="rol">
+    <Key>
+      <PropertyRef Name="id_rol" />
+    </Key>
+    <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="privilegio" Relationship="Self.privilegio_ibfk_1" FromRole="rol" ToRole="privilegio" />
+  </EntityType>
+  <EntityType Name="servicio">
+    <Key>
+      <PropertyRef Name="id_servicio" />
+    </Key>
+    <Property Name="id_servicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="area" Type="Int32" Nullable="false" />
+    <Property Name="nombre_servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="area1" Relationship="Self.servicio_ibfk_1" FromRole="servicio" ToRole="area" />
+  </EntityType>
+  <EntityType Name="tecnico">
+    <Key>
+      <PropertyRef Name="id_tecnico" />
+    </Key>
+    <Property Name="id_tecnico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="personaTec" Type="Int32" Nullable="false" />
+    <Property Name="nroseguro" Type="Int32" Nullable="false" />
+    <Property Name="salario" Type="Decimal" Nullable="false" />
+    <Property Name="fechainscripcion" Type="DateTime" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="persona" Relationship="Self.tecnico_ibfk_1" FromRole="tecnico" ToRole="persona" />
+  </EntityType>
+  <EntityType Name="telefono">
+    <Key>
+      <PropertyRef Name="id_telefono" />
+    </Key>
+    <Property Name="id_telefono" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="personaT" Type="Int32" Nullable="false" />
+    <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="numero" Type="Int32" Nullable="false" />
+    <Property Name="estafo" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="persona" Relationship="Self.telefono_ibfk_1" FromRole="telefono" ToRole="persona" />
+  </EntityType>
+  <EntityType Name="tiposervicio">
+    <Key>
+      <PropertyRef Name="id_tiposervicio" />
+    </Key>
+    <Property Name="id_tiposervicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="personaU" Type="Int32" Nullable="false" />
+    <Property Name="nombreusuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pasword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="persona" Relationship="Self.usuario_ibfk_1" FromRole="usuario" ToRole="persona" />
+  </EntityType>
+  <Association Name="servicio_ibfk_1">
+    <End Role="area" Type="Self.area" Multiplicity="1" />
+    <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="area">
+        <PropertyRef Name="id_area" />
+      </Principal>
+      <Dependent Role="servicio">
+        <PropertyRef Name="area" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="direccion_ibfk_1">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="direccion" Type="Self.direccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id_persona" />
+      </Principal>
+      <Dependent Role="direccion">
+        <PropertyRef Name="personaD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tecnico_ibfk_1">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="tecnico" Type="Self.tecnico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id_persona" />
+      </Principal>
+      <Dependent Role="tecnico">
+        <PropertyRef Name="personaTec" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="telefono_ibfk_1">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="telefono" Type="Self.telefono" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id_persona" />
+      </Principal>
+      <Dependent Role="telefono">
+        <PropertyRef Name="personaT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="usuario_ibfk_1">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id_persona" />
+      </Principal>
+      <Dependent Role="usuario">
+        <PropertyRef Name="personaU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="privilegio_ibfk_1">
+    <End Role="rol" Type="Self.rol" Multiplicity="1" />
+    <End Role="privilegio" Type="Self.privilegio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rol">
+        <PropertyRef Name="id_rol" />
+      </Principal>
+      <Dependent Role="privilegio">
+        <PropertyRef Name="rool" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="multiservisEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="area" EntityType="Self.area" />
+    <EntitySet Name="direccion" EntityType="Self.direccion" />
+    <EntitySet Name="persona" EntityType="Self.persona" />
+    <EntitySet Name="privilegio" EntityType="Self.privilegio" />
+    <EntitySet Name="rol" EntityType="Self.rol" />
+    <EntitySet Name="servicio" EntityType="Self.servicio" />
+    <EntitySet Name="tecnico" EntityType="Self.tecnico" />
+    <EntitySet Name="telefono" EntityType="Self.telefono" />
+    <EntitySet Name="tiposervicio" EntityType="Self.tiposervicio" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <AssociationSet Name="servicio_ibfk_1" Association="Self.servicio_ibfk_1">
+      <End Role="area" EntitySet="area" />
+      <End Role="servicio" EntitySet="servicio" />
+    </AssociationSet>
+    <AssociationSet Name="direccion_ibfk_1" Association="Self.direccion_ibfk_1">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="direccion" EntitySet="direccion" />
+    </AssociationSet>
+    <AssociationSet Name="tecnico_ibfk_1" Association="Self.tecnico_ibfk_1">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="tecnico" EntitySet="tecnico" />
+    </AssociationSet>
+    <AssociationSet Name="telefono_ibfk_1" Association="Self.telefono_ibfk_1">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="telefono" EntitySet="telefono" />
+    </AssociationSet>
+    <AssociationSet Name="usuario_ibfk_1" Association="Self.usuario_ibfk_1">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+    <AssociationSet Name="privilegio_ibfk_1" Association="Self.privilegio_ibfk_1">
+      <End Role="rol" EntitySet="rol" />
+      <End Role="privilegio" EntitySet="privilegio" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

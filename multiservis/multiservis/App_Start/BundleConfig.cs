@@ -38,8 +38,32 @@ namespace multiservis
                 "~/Resources/plugins/js/area.js"
                 ));
             bundles.Add(new ScriptBundle("~/bundles/servicio").Include(
-    "~/Resources/plugins/js/servicio.js"
-    ));
+                "~/Resources/plugins/js/servicio.js"
+                 ));
+            bundles.Add(new ScriptBundle("~/bundles/tiposervicio").Include(
+                "~/Resources/plugins/js/tiposervicio.js"
+                 ));
+            bundles.Add(new ScriptBundle("~/bundles/rol").Include(
+                "~/Resources/plugins/js/rol.js"
+                 ));
+            bundles.Add(new ScriptBundle("~/bundles/privilegio").Include(
+                "~/Resources/plugins/js/privilegio.js"
+                 ));
+            bundles.Add(new ScriptBundle("~/bundles/material").Include(
+            "~/Resources/plugins/js/material.js"
+             ));
+            bundles.Add(new ScriptBundle("~/bundles/herramienta").Include(
+            "~/Resources/plugins/js/herramienta.js"
+             ));
+            bundles.Add(new ScriptBundle("~/bundles/unidad_herramienta").Include(
+            "~/Resources/plugins/js/unidad_herramienta.js"
+            ));
+            bundles.Add(new ScriptBundle("~/bundles/unidad_material").Include(
+            "~/Resources/plugins/js/unidad_material.js"
+            ));
+            bundles.Add(new ScriptBundle("~/bundles/tecnico").Include(
+            "~/Resources/plugins/js/tecnico.js"
+            ));
         }
     }
 }

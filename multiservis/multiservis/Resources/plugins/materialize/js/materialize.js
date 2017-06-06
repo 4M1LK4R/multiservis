@@ -8224,4 +8224,3 @@ Picker.extend( 'pickadate', DatePicker )
   };
 
 }( jQuery ));
-console.log('materialize.js');
