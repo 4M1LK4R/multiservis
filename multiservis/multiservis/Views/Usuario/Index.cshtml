@@ -1,18 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "Tecnicos";
+    ViewBag.Title = "Usuario";
 }
 <div class="container">
 
     <div class="row">
         <center>
-            <p class="white-text flow-text"><b>TECNICOS</b></p>
+            <p class="white-text flow-text"><b>USUARIOS</b></p>
         </center>
         <hr>
         <br>
         <div class="col s12 m12 l12">
             <center>
-                <p class="white-text flow-text">Tabla de Tecnicos.</p>
+                <p class="white-text flow-text">Tabla de Usuarios.</p>
             </center>
             <a id="btnListar" onclick="CrearDataTable();" class="btn teal waves-effect"><i class="icon-list-numbered"></i>Mostrar</a>
         </div>
@@ -134,22 +134,16 @@
                 <input id="id" type="text" hidden value="0">
                 <div class="input-field col s12 m12 l12">
                     <i class="icon-right-dir prefix"></i>
-                    <input id="nro_seguro" type="text">
-                    <label for="nro_seguro">Nro Seguro</label>
+                    <input id="nombre_usuario" type="text">
+                    <label for="nombre_usuario">Nombre de Usuario</label>
                 </div>
             </div>
             <div class="row">
                 <input id="id" type="text" hidden value="0">
                 <div class="input-field col s12 m12 l12">
                     <i class="icon-right-dir prefix"></i>
-                    <input id="salario" type="text">
-                    <label for="salario">Salario (Decimal 0,0)</label>
-                </div>
-            </div>
-            Fecha de Inscripción:
-            <div class="row">
-                <div class="col s12 m12 l12">
-                    <input type="date" id="fecha_inscripcion" class="datepicker">
+                    <input id="password_usuario" type="password">
+                    <label for="password_usuario">Contraseña</label>
                 </div>
             </div>
             <p class="grey-text">Estado:</p>
@@ -187,7 +181,7 @@
     </div>
 </div>
 @section Scripts {
-    @Scripts.Render("~/bundles/tecnico")
+    @Scripts.Render("~/bundles/usuario")
 }
 
 

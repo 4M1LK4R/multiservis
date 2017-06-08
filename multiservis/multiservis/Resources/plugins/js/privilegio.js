@@ -107,7 +107,7 @@ function Listar() {
 };
 
 function ListarRol() {
-    $.getJSON("/Privilegio/ListarRoles", function (cadena) {
+    $.getJSON("/Rol/ListarRoles", function (cadena) {
         $('#campoRol').html(cadena);
         $('select').material_select();
     });

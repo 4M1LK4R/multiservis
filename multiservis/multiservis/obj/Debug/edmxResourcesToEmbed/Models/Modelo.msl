@@ -39,6 +39,7 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="ficha_tecnica" ColumnName="ficha_tecnica" />
           <ScalarProperty Name="unidad_herramienta" ColumnName="unidad_herramienta" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
           <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -49,6 +50,7 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="ficha_tecnica" ColumnName="ficha_tecnica" />
           <ScalarProperty Name="unidad_material" ColumnName="unidad_material" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
           <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -75,19 +77,6 @@
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="precio" ColumnName="precio" />
           <ScalarProperty Name="tiempo" ColumnName="tiempo" />
-          <ScalarProperty Name="estado" ColumnName="estado" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="direccion">
-      <EntityTypeMapping TypeName="multiservisModel.direccion">
-        <MappingFragment StoreEntitySet="direccion">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="persona" ColumnName="persona" />
-          <ScalarProperty Name="direccion_fija" ColumnName="direccion_fija" />
-          <ScalarProperty Name="zona" ColumnName="zona" />
-          <ScalarProperty Name="barrio" ColumnName="barrio" />
-          <ScalarProperty Name="calle" ColumnName="calle" />
           <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -132,6 +121,8 @@
           <ScalarProperty Name="materno" ColumnName="materno" />
           <ScalarProperty Name="correo" ColumnName="correo" />
           <ScalarProperty Name="nacionalidad" ColumnName="nacionalidad" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -196,17 +187,6 @@
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="especialidad" ColumnName="especialidad" />
           <ScalarProperty Name="nivel" ColumnName="nivel" />
-          <ScalarProperty Name="estado" ColumnName="estado" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="telefono">
-      <EntityTypeMapping TypeName="multiservisModel.telefono">
-        <MappingFragment StoreEntitySet="telefono">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="persona" ColumnName="persona" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
-          <ScalarProperty Name="numero" ColumnName="numero" />
           <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>

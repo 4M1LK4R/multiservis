@@ -1,7 +1,9 @@
 var est = true;
 $(document).ready(function () {
     Listar();
-    $('#salario').numeric();
+    ListarServicios();
+    $('#precio').numeric();
+    $('#tiempo').numeric();
 })
 
 $('#activo').click(function () {
@@ -42,51 +44,38 @@ $('#cancelar').click(function () {
 });
 
 function EvaluarVacios() {
-    if ($('#nombres').val() == '') {
+    if ($('#selectServicio').val() == null) {
+        Materialize.toast('Debe serleccionar una servicio!', 8000);
+        return false;
+    }
+    if ($('#nombre').val() == '') {
         Materialize.toast('Debe establecer un nombre!', 8000);
         return false;
     }
-    if ($('#nacionalidad').val() == null) {
-        Materialize.toast('Debe establecer una nacionalidad!', 8000);
+    if ($('#precio').val() == '') {
+        Materialize.toast('Debe establecer un precio!', 8000);
         return false;
     }
-    if ($('#ci').val() == '') {
-        Materialize.toast('Debe establecer el C.I.!', 8000);
-        return false;
-    }
-    if ($('#nro_seguro').val() == '') {
-        Materialize.toast('Debe establecer el nro de seguro!', 8000);
-        return false;
-    }
-    if ($('#salario').val() == '') {
-        Materialize.toast('Debe establecer un salario minimo 0!', 8000);
-        return false;
-    }
-    if ($('#fecha_inscripcion').val() == '') {
-        Materialize.toast('Debe establecer la fecha de inscripcion!', 8000);
+    if ($('#tiempo').val() == '') {
+        Materialize.toast('Debe establecer el tiempo de duracion en Hrs!', 8000);
         return false;
     }
     else {
         return true;
     }
 };
+
 function Guardar() {
     var o = {
-        id: $('#id').val(),
-        nombres: $('#nombres').val(),
-        parterno: $('#paterno').val(),
-        materno: $('#materno').val(),
-        correo: $('#correo').val(),
-        nacionalidad: $('#nacionalidad').val(),
-        ci: $('#ci').val(),
-        telefono: $('#telefono').val(),
-        direccion: $('#direccion').val(),
-        nro_seguro: $('#nro_seguro').val(),
-        salario: $('#salario').val(),
-        fecha_inscripcion: $('#fecha_inscripcion').val(),
-        estado: est
-    };    
-    $.getJSON("/Tecnico/Guardar", o, function (e) {
+    id : $('#id').val(),
+    servicio : $('#selectServicio').val(),
+    nombre : $('#nombre').val(),
+    precio : $('#precio').val(),
+    tiempo : $('#tiempo').val(),
+    estado : est
+    };
+
+    $.getJSON("/DetalleServicio/Guardar", o, function (e) {
         if (e != "") {
             Materialize.toast(e, 8000);
         }
@@ -101,21 +90,14 @@ function Guardar() {
 };
 function Editar(id) {
     var o = { id: id };
-    $.getJSON("/Tecnico/Get", o, function (obj) {
+    $.getJSON("/DetalleServicio/Get", o, function (obj) {
         var codigo = '<p class="red-text text-darken-3 flow-text">EDITAR ' + obj.nombre + '</p>';
         $('#cabeceraModal').html(codigo);
         $('#id').val(id);
-        $('#nombres').val(obj.nombres);
-        $('#paterno').val(obj.paterno);
-        $('#materno').val(obj.materno);
-        $('#correo').val(obj.correo);
-        $('#nacionalidad').val(obj.nacionalidad);
-        $('#ci').val(obj.ci);
-        $('#telefono').val(obj.telefono);
-        $('#direccion').val(obj.direccion);
-        $('#nro_seguro').val(obj.nro_seguro);
-        $('#salario').val(obj.salario);
-        $('#fecha_inscripcion').val(obj.fecha_inscripcion);
+        $('#selectServicio').val(obj.servicio);
+        $('#nombre').val(obj.nombre);
+        $('#precio').val(obj.precio);
+        $('#tiempo').val(obj.tiempo);        
         $('select').material_select();
         est = obj.estado;
         CargarEstadoEnChck(est);
@@ -125,27 +107,27 @@ function Editar(id) {
 };
 
 function LimpiarCampos() {
-    $('#id').val(0),
-    $('#nombres').val(''),
-    $('#paterno').val(''),
-    $('#materno').val(''),
-    $('#correo').val(''),
-    $('#nacionalidad').val(''),
-    $('#ci').val(''),
-    $('#telefono').val(''),
-    $('#direccion').val(''),
-    $('#nro_seguro').val(''),
-    $('#salario').val(''),
-    $('#fecha_inscripcion').val(''),
+    $('#id').val(0);    
+    $('#selectServicio').val('');
+    $('#nombre').val('');
+    $('#precio').val('');
+    $('#tiempo').val(''); 
     $('select').material_select();
 };
 
 function Listar() {
-    $.getJSON("/Tecnico/Listar", null, function (cadena) {
+    $.getJSON("/DetalleServicio/Listar", null, function (cadena) {
         $("#tabla").html(cadena);
         CrearDataTable();
     });
     $('#btnListar').show();
+};
+
+function ListarServicios() {
+    $.getJSON("/Servicio/ListarSelectServicios", function (cadena) {
+        $('#campoServicio').html(cadena);
+        $('select').material_select();
+    });
 };
 
 function ModalConfirmar(id, nom) {
@@ -158,7 +140,7 @@ function ModalConfirmar(id, nom) {
 $('#aceptarEliminar').click(function () {
     Eliminar($('#idEliminar').val());
     $('#modalEliminar').modal('close');
-    Materialize.toast('El Tecnico fue eliminado exitosamente!', 8000);
+    Materialize.toast('La Detalle de Servicio fue eliminado exitosamente!', 8000);
     Listar();
 });
 $('#cancelarEliminar').click(function () {
@@ -169,7 +151,7 @@ $('#cancelarEliminar').click(function () {
 
 function Eliminar(id) {
     var o = { id: id };
-    $.getJSON("/Tecnico/Delete", o, function (e) {
+    $.getJSON("/DetalleServicio/Delete", o, function (e) {
         Listar();
     });
 };

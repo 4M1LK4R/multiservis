@@ -7,7 +7,7 @@ using multiservis.Models;
 
 namespace multiservis.Controllers
 {
-    public class AreaController : Controller
+    public class AsignarRolUsuarioController : Controller
     {
         multiservisEntities BD = new multiservisEntities();
         public ActionResult Index()
@@ -20,16 +20,20 @@ namespace multiservis.Controllers
             cadena = "<table id='data' class='display highlight' cellspacing='0' hidden>";
             cadena += "<thead class='red darken-3 white-text z-depth-3'>";
             cadena += "<tr>";
-            cadena += "<th>Nombre</th>";
+            cadena += "<th>Nombre Usuario</th>";
+            cadena += "<th>Rol</th>";
+            cadena += "<th>Fecha Asignado</th>";
             cadena += "<th>Estado</th>";
             cadena += "<th>Opciones</th>";
             cadena += "</tr>";
             cadena += "</thead>";
             cadena += "<tbody>";
-            foreach (var obj in BD.area.ToList())
+            foreach (var obj in BD.asignar_rol_usuario.ToList())
             {
                 cadena += "<tr>";
-                cadena += "<td>" + obj.nombre + "</td>";
+                cadena += "<td>" + obj.usuario1.nombre_usuario + "</td>";
+                cadena += "<td>" + obj.rol1.nombre + "</td>";
+                cadena += "<td>" + obj.fecha_asigna.ToShortDateString() + "</td>";
                 if (obj.estado)
                 {
                     cadena += "<td>Activo</td>";
@@ -40,7 +44,7 @@ namespace multiservis.Controllers
                 }
                 cadena += "<td>";
                 cadena += "<a class='waves-effect waves-light btn btn-floating blue'><i class='icon-pencil-1' onclick='Editar(" + obj.id + ");'></i></a>&nbsp;";
-                cadena += "<a class='waves-effect waves-light btn btn-floating red'><i class='icon-trash' onclick='ModalConfirmar(" + obj.id + ",\"" + obj.nombre + "\");'></i></a>";
+                cadena += "<a class='waves-effect waves-light btn btn-floating red'><i class='icon-trash' onclick='ModalConfirmar(" + obj.id + ",\"" + obj.id + "\");'></i></a>";
                 cadena += "</td>";
                 cadena += "</tr>";
             }
@@ -48,30 +52,36 @@ namespace multiservis.Controllers
             cadena += "</table>";
             return Json(cadena, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Guardar(int id, string nombre, bool estado)
+        public ActionResult Guardar(int id, int usuario, int rol, string fecha, bool estado)
         {
-            area obj;
+            asignar_rol_usuario obj;
             string error = "";
-            if (string.IsNullOrEmpty(nombre))
-                error = "El campo nombre esta vacio";
-
-            if (BD.area.ToList().Exists(o => o.nombre == nombre) && id == 0)
-                error = "Ya existe un objeto con es nombre";
-
+            try
+            {
+                DateTime d = DateTime.Parse(fecha).Date;
+            }
+            catch
+            {
+                error = "Debe seleccionar una fecha valida!";
+            }
             if (string.IsNullOrEmpty(error))
             {
                 if (id == 0)
                 {
-                    obj = new area();
-                    obj.nombre = nombre;
+                    obj = new asignar_rol_usuario();
+                    obj.usuario = usuario;
+                    obj.rol = rol;
+                    obj.fecha_asigna = DateTime.Parse(fecha).Date;
                     obj.estado = estado;
-                    BD.area.Add(obj);
+                    BD.asignar_rol_usuario.Add(obj);
                     BD.SaveChanges();
                 }
                 else
                 {
-                    obj = BD.area.Single(o => o.id == id);
-                    obj.nombre = nombre;
+                    obj = BD.asignar_rol_usuario.Single(o => o.id == id);
+                    obj.usuario = usuario;
+                    obj.rol = rol;
+                    obj.fecha_asigna = DateTime.Parse(fecha).Date;
                     obj.estado = estado;
                     BD.SaveChanges();
                 }
@@ -81,20 +91,22 @@ namespace multiservis.Controllers
         }
         public ActionResult Get(int id)
         {
-            area obj = BD.area.Single(o => o.id == id);
-            var area = new
+            asignar_rol_usuario obj = BD.asignar_rol_usuario.Single(o => o.id == id);
+            var asignar_rol_usuario = new
             {
-                nombre = obj.nombre,
+                usuario = obj.usuario,
+                rol = obj.rol,
+                fecha = obj.fecha_asigna.ToShortDateString(),
                 estado = obj.estado
             };
-            return Json(area, JsonRequestBehavior.AllowGet);
+            return Json(asignar_rol_usuario, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Delete(int id)
         {
             try
             {
-                area obj = BD.area.Single(o => o.id == id);
-                BD.area.Remove(obj);
+                asignar_rol_usuario obj = BD.asignar_rol_usuario.Single(o => o.id == id);
+                BD.asignar_rol_usuario.Remove(obj);
                 BD.SaveChanges();
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
@@ -102,17 +114,6 @@ namespace multiservis.Controllers
             {
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
-        }
-        public ActionResult ListarSelectAreas()
-        {
-            string cadena = "<select id='selectArea'>";
-            cadena += "<option value='' disabled selected>(Seleccionar)</option>";
-            foreach (var item in BD.area.ToList().Where(o => o.estado))
-            {
-                cadena += "<option value=" + item.id + ">" + item.nombre + "</option>";
-            }
-            cadena += "</select>";
-            return Json(cadena, JsonRequestBehavior.AllowGet);
         }
     }
 }

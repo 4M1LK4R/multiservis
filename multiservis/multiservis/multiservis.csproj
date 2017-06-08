@@ -179,13 +179,17 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\AsignarRolUsuarioController.cs" />
+    <Compile Include="Controllers\DetalleServicioController.cs" />
     <Compile Include="Controllers\HerramientaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\PrivilegioController.cs" />
+    <Compile Include="Controllers\ReservaController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\ServicioController.cs" />
+    <Compile Include="Controllers\TecnicoAreaController.cs" />
     <Compile Include="Controllers\TecnicoController.cs" />
     <Compile Include="Controllers\TipoServicioController.cs" />
     <Compile Include="Controllers\UnidadHerramientaController.cs" />
@@ -214,9 +218,6 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\detalle_servicio.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\direccion.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ficha_tecnica.cs">
@@ -264,9 +265,6 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tecnico_area.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\telefono.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tipo_servicio.cs">
@@ -319,8 +317,13 @@
     <Content Include="Resources\plugins\jquery\jquery.numeric.js" />
     <Content Include="Resources\plugins\js\herramienta.js" />
     <Content Include="Resources\plugins\js\privilegio.js" />
+    <Content Include="Resources\plugins\js\reserva.js" />
     <Content Include="Resources\plugins\js\rol.js" />
     <Content Include="Resources\plugins\js\material.js" />
+    <Content Include="Resources\plugins\js\asignar_rol_usuario.js" />
+    <Content Include="Resources\plugins\js\detalle_servicio.js" />
+    <Content Include="Resources\plugins\js\usuario.js" />
+    <Content Include="Resources\plugins\js\tecnico_area.js" />
     <Content Include="Resources\plugins\js\tecnico.js" />
     <Content Include="Resources\plugins\js\unidad_material.js" />
     <Content Include="Resources\plugins\js\unidad_herramienta.js" />
@@ -421,10 +424,15 @@
     <Content Include="Views\UnidadHerramienta\Index.cshtml" />
     <Content Include="Views\UnidadMaterial\Index.cshtml" />
     <Content Include="Views\Tecnico\Index.cshtml" />
+    <Content Include="Views\TecnicoArea\Index.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\AsignarRolUsuario\Index.cshtml" />
+    <Content Include="Views\DetalleServicio\Index.cshtml" />
+    <Content Include="Views\Reserva\Reserva.cshtml" />
+    <Content Include="Views\Reserva\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Usuario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

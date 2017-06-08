@@ -32,7 +32,6 @@ namespace multiservis.Models
         public virtual DbSet<detalle_ficha_material> detalle_ficha_material { get; set; }
         public virtual DbSet<detalle_reserva> detalle_reserva { get; set; }
         public virtual DbSet<detalle_servicio> detalle_servicio { get; set; }
-        public virtual DbSet<direccion> direccion { get; set; }
         public virtual DbSet<ficha_tecnica> ficha_tecnica { get; set; }
         public virtual DbSet<herramienta> herramienta { get; set; }
         public virtual DbSet<material> material { get; set; }
@@ -43,7 +42,6 @@ namespace multiservis.Models
         public virtual DbSet<servicio> servicio { get; set; }
         public virtual DbSet<tecnico> tecnico { get; set; }
         public virtual DbSet<tecnico_area> tecnico_area { get; set; }
-        public virtual DbSet<telefono> telefono { get; set; }
         public virtual DbSet<tipo_servicio> tipo_servicio { get; set; }
         public virtual DbSet<unidad_herramienta> unidad_herramienta { get; set; }
         public virtual DbSet<unidad_material> unidad_material { get; set; }

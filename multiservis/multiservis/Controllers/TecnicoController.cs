@@ -20,7 +20,6 @@ namespace multiservis.Controllers
             cadena = "<table id='data' class='display highlight' cellspacing='0' hidden>";
             cadena += "<thead class='red darken-3 white-text z-depth-3'>";
             cadena += "<tr>";
-            cadena += "<th>Ficha</th>";
             cadena += "<th>Nombres</th>";
             cadena += "<th>Paterno</th>";
             cadena += "<th>Materno</th>";
@@ -33,7 +32,6 @@ namespace multiservis.Controllers
             foreach (var obj in BD.tecnico.ToList())
             {
                 cadena += "<tr>";
-                cadena += "<a class='waves-effect waves-light btn btn-floating orange'><i class='icon-th-list' onclick='Editar(" + obj.id + ");'></i></a>";
                 cadena += "<td>" + obj.persona1.nombres + "</td>";
                 cadena += "<td>" + obj.persona1.paterno + "</td>";
                 cadena += "<td>" + obj.persona1.materno + "</td>";
@@ -56,7 +54,7 @@ namespace multiservis.Controllers
             cadena += "</table>";
             return Json(cadena, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Guardar(int id,string nombres,string parterno,string materno,string correo, string nacionalidad, string ci, string nro_seguro,string salario, string fecha_incripcion, bool estado)
+        public ActionResult Guardar(int id,string nombres,string parterno,string materno,string correo, string nacionalidad, string ci, string telefono,string direccion, string nro_seguro,string salario, string fecha_inscripcion, bool estado)
         {
             persona obj_p;
             tecnico obj_t;
@@ -65,10 +63,12 @@ namespace multiservis.Controllers
                 error = "El campo nombres esta vacio";
             if (string.IsNullOrEmpty(nacionalidad))
                 error = "El campo nacionalidad esta vacio";
+            if (string.IsNullOrEmpty(salario))
+                error = "El campo salario esta vacio";
 
             try
             {
-                DateTime d = DateTime.Parse(fecha_incripcion).Date;
+                DateTime d = DateTime.Parse(fecha_inscripcion).Date;
             }
             catch
             {
@@ -88,6 +88,8 @@ namespace multiservis.Controllers
                     obj_p.correo = correo;
                     obj_p.nacionalidad = nacionalidad;
                     obj_p.ci = int.Parse(ci);
+                    obj_p.telefono = telefono;
+                    obj_p.direccion = direccion;
                     BD.persona.Add(obj_p);
                     BD.SaveChanges();
 
@@ -95,27 +97,29 @@ namespace multiservis.Controllers
                     obj_t.persona = obj_p.id;
                     obj_t.nro_seguro = int.Parse(nro_seguro);
                     obj_t.salario = Convert.ToDecimal(salario);
-                    obj_t.fecha_inscripcion = DateTime.Parse(fecha_incripcion).Date;
+                    obj_t.fecha_inscripcion = DateTime.Parse(fecha_inscripcion).Date;
                     obj_t.estado = estado;
                     BD.tecnico.Add(obj_t);
                     BD.SaveChanges();
                 }
                 else
                 {
-                    obj_p = BD.persona.Single(o => o.id == id);
+                    obj_t = BD.tecnico.Single(o => o.id == id);
+                    obj_t.nro_seguro = int.Parse(nro_seguro);
+                    obj_t.salario = Convert.ToDecimal(salario);
+                    //obj_t.fecha_inscripcion = DateTime.Parse(fecha_inscripcion).Date;
+                    obj_t.estado = estado;
+
+                    obj_p = BD.persona.Single(o => o.id == obj_t.persona);
                     obj_p.nombres = nombres;
                     obj_p.paterno = parterno;
                     obj_p.materno = materno;
                     obj_p.correo = correo;
                     obj_p.nacionalidad = nacionalidad;
                     obj_p.ci = int.Parse(ci);
+                    obj_p.telefono = telefono;
+                    obj_p.direccion = direccion;
 
-                    obj_t = BD.tecnico.Single(o => o.id == id);
-                    obj_t.persona = obj_p.id;
-                    obj_t.nro_seguro = int.Parse(nro_seguro);
-                    obj_t.salario = Convert.ToDecimal(salario);
-                    obj_t.fecha_inscripcion = DateTime.Parse(fecha_incripcion).Date;
-                    obj_t.estado = estado;
                     BD.SaveChanges();
                 }
             }
@@ -133,7 +137,9 @@ namespace multiservis.Controllers
                 correo = obj.persona1.correo,
                 nacionalidad = obj.persona1.nacionalidad,
                 ci = obj.persona1.ci,
-                
+                telefono = obj.persona1.telefono,
+                direccion = obj.persona1.direccion,
+
                 id_persona = obj.persona,
                 nro_seguro = obj.nro_seguro,
                 salario = obj.salario.ToString(),
@@ -158,6 +164,17 @@ namespace multiservis.Controllers
             {
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
+        }
+        public ActionResult ListarSelectTecnicos()
+        {
+            string cadena = "<select id='selectTecnico'>";
+            cadena += "<option value='' disabled selected>(Seleccionar)</option>";
+            foreach (var item in BD.tecnico.ToList())
+            {
+                cadena += "<option value=" + item.id + ">" + item.persona1.nombres +" | C.I.:"+item.persona1.ci + "</option>";
+            }
+            cadena += "</select>";
+            return Json(cadena, JsonRequestBehavior.AllowGet);
         }
     }
 }

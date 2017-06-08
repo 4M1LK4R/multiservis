@@ -36,6 +36,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ficha_tecnica" Type="int" />
     <Property Name="unidad_herramienta" Type="int" />
+    <Property Name="cantidad" Type="int" />
     <Property Name="estado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="detalle_ficha_material">
@@ -45,6 +46,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ficha_tecnica" Type="int" />
     <Property Name="unidad_material" Type="int" />
+    <Property Name="cantidad" Type="int" />
     <Property Name="estado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="detalle_reserva">
@@ -69,18 +71,6 @@
     <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="precio" Type="decimal" Precision="8" Scale="2" Nullable="false" />
     <Property Name="tiempo" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="estado" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="direccion">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="persona" Type="int" Nullable="false" />
-    <Property Name="direccion_fija" Type="varchar" MaxLength="80" Nullable="false" />
-    <Property Name="zona" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="barrio" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="calle" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="estado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ficha_tecnica">
@@ -121,6 +111,8 @@
     <Property Name="materno" Type="varchar" MaxLength="50" />
     <Property Name="correo" Type="varchar" MaxLength="50" />
     <Property Name="nacionalidad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="telefono" Type="varchar" MaxLength="50" />
+    <Property Name="direccion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="privilegio">
     <Key>
@@ -179,16 +171,6 @@
     <Property Name="fecha" Type="date" Nullable="false" />
     <Property Name="especialidad" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="nivel" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="estado" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="telefono">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="persona" Type="int" Nullable="false" />
-    <Property Name="tipo" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="numero" Type="int" Nullable="false" />
     <Property Name="estado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="tipo_servicio">
@@ -363,18 +345,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="direccion_ibfk_1">
-    <End Role="persona" Type="Self.persona" Multiplicity="1" />
-    <End Role="direccion" Type="Self.direccion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="persona">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="direccion">
-        <PropertyRef Name="persona" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="ficha_tecnica_ibfk_1">
     <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="0..1" />
     <End Role="ficha_tecnica" Type="Self.ficha_tecnica" Multiplicity="*" />
@@ -459,18 +429,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="telefono_ibfk_1">
-    <End Role="persona" Type="Self.persona" Multiplicity="1" />
-    <End Role="telefono" Type="Self.telefono" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="persona">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="telefono">
-        <PropertyRef Name="persona" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="unidad_herramienta_ibfk_1">
     <End Role="herramienta" Type="Self.herramienta" Multiplicity="1" />
     <End Role="unidad_herramienta" Type="Self.unidad_herramienta" Multiplicity="*" />
@@ -515,7 +473,6 @@
     <EntitySet Name="detalle_ficha_material" EntityType="Self.detalle_ficha_material" Schema="multiservis" store:Type="Tables" />
     <EntitySet Name="detalle_reserva" EntityType="Self.detalle_reserva" Schema="multiservis" store:Type="Tables" />
     <EntitySet Name="detalle_servicio" EntityType="Self.detalle_servicio" Schema="multiservis" store:Type="Tables" />
-    <EntitySet Name="direccion" EntityType="Self.direccion" Schema="multiservis" store:Type="Tables" />
     <EntitySet Name="ficha_tecnica" EntityType="Self.ficha_tecnica" Schema="multiservis" store:Type="Tables" />
     <EntitySet Name="herramienta" EntityType="Self.herramienta" Schema="multiservis" store:Type="Tables" />
     <EntitySet Name="material" EntityType="Self.material" Schema="multiservis" store:Type="Tables" />
@@ -526,7 +483,6 @@
     <EntitySet Name="servicio" EntityType="Self.servicio" Schema="multiservis" store:Type="Tables" />
     <EntitySet Name="tecnico" EntityType="Self.tecnico" Schema="multiservis" store:Type="Tables" />
     <EntitySet Name="tecnico_area" EntityType="Self.tecnico_area" Schema="multiservis" store:Type="Tables" />
-    <EntitySet Name="telefono" EntityType="Self.telefono" Schema="multiservis" store:Type="Tables" />
     <EntitySet Name="tipo_servicio" EntityType="Self.tipo_servicio" Schema="multiservis" store:Type="Tables" />
     <EntitySet Name="unidad_herramienta" EntityType="Self.unidad_herramienta" Schema="multiservis" store:Type="Tables" />
     <EntitySet Name="unidad_material" EntityType="Self.unidad_material" Schema="multiservis" store:Type="Tables" />
@@ -575,10 +531,6 @@
       <End Role="servicio" EntitySet="servicio" />
       <End Role="detalle_servicio" EntitySet="detalle_servicio" />
     </AssociationSet>
-    <AssociationSet Name="direccion_ibfk_1" Association="Self.direccion_ibfk_1">
-      <End Role="persona" EntitySet="persona" />
-      <End Role="direccion" EntitySet="direccion" />
-    </AssociationSet>
     <AssociationSet Name="ficha_tecnica_ibfk_1" Association="Self.ficha_tecnica_ibfk_1">
       <End Role="detalle_reserva" EntitySet="detalle_reserva" />
       <End Role="ficha_tecnica" EntitySet="ficha_tecnica" />
@@ -606,10 +558,6 @@
     <AssociationSet Name="tecnico_ibfk_1" Association="Self.tecnico_ibfk_1">
       <End Role="persona" EntitySet="persona" />
       <End Role="tecnico" EntitySet="tecnico" />
-    </AssociationSet>
-    <AssociationSet Name="telefono_ibfk_1" Association="Self.telefono_ibfk_1">
-      <End Role="persona" EntitySet="persona" />
-      <End Role="telefono" EntitySet="telefono" />
     </AssociationSet>
     <AssociationSet Name="unidad_herramienta_ibfk_1" Association="Self.unidad_herramienta_ibfk_1">
       <End Role="herramienta" EntitySet="herramienta" />

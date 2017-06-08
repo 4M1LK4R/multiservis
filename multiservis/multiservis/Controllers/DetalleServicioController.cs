@@ -7,44 +7,12 @@ using multiservis.Models;
 
 namespace multiservis.Controllers
 {
-    public class TipoServicioController : Controller
+    public class DetalleServicioController : Controller
     {
         multiservisEntities BD = new multiservisEntities();
         public ActionResult Index()
         {
             return View();
-        }
-
-        public ActionResult Guardar(int id, string nombre, bool estado)
-        {
-            tipo_servicio obj;
-            string error = "";
-            if (string.IsNullOrEmpty(nombre))
-                error = "El campo nombre esta vacio";
-
-            if (BD.tipo_servicio.ToList().Exists(o => o.nombre == nombre) && id == 0)
-                error = "Ya existe un objeto con es nombre";
-
-            if (string.IsNullOrEmpty(error))
-            {
-                if (id == 0)
-                {
-                    obj = new tipo_servicio();
-                    obj.nombre = nombre;
-                    obj.estado = estado;
-                    BD.tipo_servicio.Add(obj);
-                    BD.SaveChanges();
-                }
-                else
-                {
-                    obj = BD.tipo_servicio.Single(o => o.id == id);
-                    obj.nombre = nombre;
-                    obj.estado = estado;
-                    BD.SaveChanges();
-                }
-            }
-
-            return Json(error, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Listar()
         {
@@ -52,16 +20,22 @@ namespace multiservis.Controllers
             cadena = "<table id='data' class='display highlight' cellspacing='0' hidden>";
             cadena += "<thead class='red darken-3 white-text z-depth-3'>";
             cadena += "<tr>";
-            cadena += "<th>Nombre</th>";
+            cadena += "<th>Servicio</th>";
+            cadena += "<th>Nombre Detalle</th>";
+            cadena += "<th>Precio</th>";
+            cadena += "<th>Tiempo (Hrs.)</th>";
             cadena += "<th>Estado</th>";
             cadena += "<th>Opciones</th>";
             cadena += "</tr>";
             cadena += "</thead>";
             cadena += "<tbody>";
-            foreach (var obj in BD.tipo_servicio.ToList())
+            foreach (var obj in BD.detalle_servicio.ToList())
             {
                 cadena += "<tr>";
+                cadena += "<td>" + obj.servicio1.nombre + "</td>";
                 cadena += "<td>" + obj.nombre + "</td>";
+                cadena += "<td>" + obj.precio + "</td>";
+                cadena += "<td>" + obj.tiempo + "</td>";
                 if (obj.estado)
                 {
                     cadena += "<td>Activo</td>";
@@ -80,22 +54,58 @@ namespace multiservis.Controllers
             cadena += "</table>";
             return Json(cadena, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Guardar(int id, int servicio, string nombre, string precio, string tiempo, bool estado)
+        {
+            detalle_servicio obj;
+            string error = "";
+
+            if (string.IsNullOrEmpty(error))
+            {
+                if (id == 0)
+                {
+                    obj = new detalle_servicio();
+                    obj.servicio = servicio;
+                    obj.nombre = nombre;
+                    obj.precio = Convert.ToDecimal(precio);
+                    obj.tiempo = tiempo;
+                    obj.estado = estado;
+                    BD.detalle_servicio.Add(obj);
+                    BD.SaveChanges();
+                }
+                else
+                {
+                    obj = BD.detalle_servicio.Single(o => o.id == id);
+                    obj.servicio = servicio;
+                    obj.nombre = nombre;
+                    obj.precio = Convert.ToDecimal(precio);
+                    obj.tiempo = tiempo;
+                    obj.estado = estado;
+                    BD.SaveChanges();
+                }
+            }
+
+            return Json(error, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Get(int id)
         {
-            tipo_servicio obj = BD.tipo_servicio.Single(o => o.id == id);
-            var tipo_servicio = new
+            detalle_servicio obj = BD.detalle_servicio.Single(o => o.id == id);
+            var detalle_servicio = new
             {
+                servicio = obj.servicio,
                 nombre = obj.nombre,
+                precio = obj.precio,
+                tiempo = obj.tiempo,
                 estado = obj.estado
             };
-            return Json(tipo_servicio, JsonRequestBehavior.AllowGet);
+            return Json(detalle_servicio, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Delete(int id)
         {
             try
             {
-                tipo_servicio obj = BD.tipo_servicio.Single(o => o.id == id);
-                BD.tipo_servicio.Remove(obj);
+                detalle_servicio obj = BD.detalle_servicio.Single(o => o.id == id);
+                BD.detalle_servicio.Remove(obj);
                 BD.SaveChanges();
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
@@ -103,17 +113,6 @@ namespace multiservis.Controllers
             {
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
-        }
-        public ActionResult ListarSelectTipoServicios()
-        {
-            string cadena = "<select id='selectTipoServicio'>";
-            cadena += "<option value='' disabled selected>(Seleccionar)</option>";
-            foreach (var item in BD.tipo_servicio.ToList())
-            {
-                cadena += "<option value=" + item.id + ">" + item.nombre + "</option>";
-            }
-            cadena += "</select>";
-            return Json(cadena, JsonRequestBehavior.AllowGet);
         }
     }
 }

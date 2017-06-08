@@ -40,6 +40,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ficha_tecnica" Type="Int32" />
     <Property Name="unidad_herramienta" Type="Int32" />
+    <Property Name="cantidad" Type="Int32" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ficha_tecnica1" Relationship="Self.detalle_ficha_herramienta_ibfk_1" FromRole="detalle_ficha_herramienta" ToRole="ficha_tecnica" />
     <NavigationProperty Name="unidad_herramienta1" Relationship="Self.detalle_ficha_herramienta_ibfk_2" FromRole="detalle_ficha_herramienta" ToRole="unidad_herramienta" />
@@ -51,6 +52,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ficha_tecnica" Type="Int32" />
     <Property Name="unidad_material" Type="Int32" />
+    <Property Name="cantidad" Type="Int32" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ficha_tecnica1" Relationship="Self.detalle_ficha_material_ibfk_1" FromRole="detalle_ficha_material" ToRole="ficha_tecnica" />
     <NavigationProperty Name="unidad_material1" Relationship="Self.detalle_ficha_material_ibfk_2" FromRole="detalle_ficha_material" ToRole="unidad_material" />
@@ -85,19 +87,6 @@
     <Property Name="estado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="detalle_reserva" Relationship="Self.detalle_reserva_ibfk_2" FromRole="detalle_servicio" ToRole="detalle_reserva" />
     <NavigationProperty Name="servicio1" Relationship="Self.detalle_servicio_ibfk_1" FromRole="detalle_servicio" ToRole="servicio" />
-  </EntityType>
-  <EntityType Name="direccion">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="persona" Type="Int32" Nullable="false" />
-    <Property Name="direccion_fija" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="zona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="calle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="persona1" Relationship="Self.direccion_ibfk_1" FromRole="direccion" ToRole="persona" />
   </EntityType>
   <EntityType Name="ficha_tecnica">
     <Key>
@@ -142,10 +131,10 @@
     <Property Name="materno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="nacionalidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="direccion" Relationship="Self.direccion_ibfk_1" FromRole="persona" ToRole="direccion" />
+    <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="reserva" Relationship="Self.reserva_ibfk_1" FromRole="persona" ToRole="reserva" />
     <NavigationProperty Name="tecnico" Relationship="Self.tecnico_ibfk_1" FromRole="persona" ToRole="tecnico" />
-    <NavigationProperty Name="telefono" Relationship="Self.telefono_ibfk_1" FromRole="persona" ToRole="telefono" />
     <NavigationProperty Name="usuario" Relationship="Self.usuario_ibfk_1" FromRole="persona" ToRole="usuario" />
   </EntityType>
   <EntityType Name="privilegio">
@@ -218,17 +207,6 @@
     <Property Name="estado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="tecnico1" Relationship="Self.tecnico_area_ibfk_1" FromRole="tecnico_area" ToRole="tecnico" />
     <NavigationProperty Name="tipo_servicio1" Relationship="Self.tecnico_area_ibfk_2" FromRole="tecnico_area" ToRole="tipo_servicio" />
-  </EntityType>
-  <EntityType Name="telefono">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="persona" Type="Int32" Nullable="false" />
-    <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="numero" Type="Int32" Nullable="false" />
-    <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="persona1" Relationship="Self.telefono_ibfk_1" FromRole="telefono" ToRole="persona" />
   </EntityType>
   <EntityType Name="tipo_servicio">
     <Key>
@@ -433,18 +411,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="direccion_ibfk_1">
-    <End Role="persona" Type="Self.persona" Multiplicity="1" />
-    <End Role="direccion" Type="Self.direccion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="persona">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="direccion">
-        <PropertyRef Name="persona" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="unidad_herramienta_ibfk_1">
     <End Role="herramienta" Type="Self.herramienta" Multiplicity="1" />
     <End Role="unidad_herramienta" Type="Self.unidad_herramienta" Multiplicity="*" />
@@ -489,18 +455,6 @@
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="tecnico">
-        <PropertyRef Name="persona" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="telefono_ibfk_1">
-    <End Role="persona" Type="Self.persona" Multiplicity="1" />
-    <End Role="telefono" Type="Self.telefono" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="persona">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="telefono">
         <PropertyRef Name="persona" />
       </Dependent>
     </ReferentialConstraint>
@@ -561,7 +515,6 @@
     <EntitySet Name="detalle_ficha_material" EntityType="Self.detalle_ficha_material" />
     <EntitySet Name="detalle_reserva" EntityType="Self.detalle_reserva" />
     <EntitySet Name="detalle_servicio" EntityType="Self.detalle_servicio" />
-    <EntitySet Name="direccion" EntityType="Self.direccion" />
     <EntitySet Name="ficha_tecnica" EntityType="Self.ficha_tecnica" />
     <EntitySet Name="herramienta" EntityType="Self.herramienta" />
     <EntitySet Name="material" EntityType="Self.material" />
@@ -572,7 +525,6 @@
     <EntitySet Name="servicio" EntityType="Self.servicio" />
     <EntitySet Name="tecnico" EntityType="Self.tecnico" />
     <EntitySet Name="tecnico_area" EntityType="Self.tecnico_area" />
-    <EntitySet Name="telefono" EntityType="Self.telefono" />
     <EntitySet Name="tipo_servicio" EntityType="Self.tipo_servicio" />
     <EntitySet Name="unidad_herramienta" EntityType="Self.unidad_herramienta" />
     <EntitySet Name="unidad_material" EntityType="Self.unidad_material" />
@@ -629,10 +581,6 @@
       <End Role="servicio" EntitySet="servicio" />
       <End Role="detalle_servicio" EntitySet="detalle_servicio" />
     </AssociationSet>
-    <AssociationSet Name="direccion_ibfk_1" Association="Self.direccion_ibfk_1">
-      <End Role="persona" EntitySet="persona" />
-      <End Role="direccion" EntitySet="direccion" />
-    </AssociationSet>
     <AssociationSet Name="unidad_herramienta_ibfk_1" Association="Self.unidad_herramienta_ibfk_1">
       <End Role="herramienta" EntitySet="herramienta" />
       <End Role="unidad_herramienta" EntitySet="unidad_herramienta" />
@@ -648,10 +596,6 @@
     <AssociationSet Name="tecnico_ibfk_1" Association="Self.tecnico_ibfk_1">
       <End Role="persona" EntitySet="persona" />
       <End Role="tecnico" EntitySet="tecnico" />
-    </AssociationSet>
-    <AssociationSet Name="telefono_ibfk_1" Association="Self.telefono_ibfk_1">
-      <End Role="persona" EntitySet="persona" />
-      <End Role="telefono" EntitySet="telefono" />
     </AssociationSet>
     <AssociationSet Name="usuario_ibfk_1" Association="Self.usuario_ibfk_1">
       <End Role="persona" EntitySet="persona" />

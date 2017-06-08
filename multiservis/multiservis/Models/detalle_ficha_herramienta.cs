@@ -17,6 +17,7 @@ namespace multiservis.Models
         public int id { get; set; }
         public Nullable<int> ficha_tecnica { get; set; }
         public Nullable<int> unidad_herramienta { get; set; }
+        public Nullable<int> cantidad { get; set; }
         public bool estado { get; set; }
     
         public virtual ficha_tecnica ficha_tecnica1 { get; set; }

@@ -104,6 +104,17 @@ namespace multiservis.Controllers
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
         }
+        public ActionResult ListarSelectRoles()
+        {
+            string cadena = "<select id='selectRol'>";
+            cadena += "<option value='' disabled selected>(Seleccionar)</option>";
+            foreach (var item in BD.rol.ToList().Where(o => o.estado))
+            {
+                cadena += "<option value=" + item.id + ">" + item.nombre + "</option>";
+            }
+            cadena += "</select>";
+            return Json(cadena, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

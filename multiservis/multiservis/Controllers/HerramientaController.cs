@@ -109,7 +109,7 @@ namespace multiservis.Controllers
         public ActionResult ListarSelectHerramientas()
         {
             string cadena = "<select id='selectHerramienta'>";
-            cadena += "<option value='' disabled selected>(Seleccionar herramienta)</option>";
+            cadena += "<option value='' disabled selected>(Seleccionar)</option>";
             foreach (var item in BD.herramienta.ToList())
             {
                 cadena += "<option value=" + item.id + ">" + item.nombre + "</option>";

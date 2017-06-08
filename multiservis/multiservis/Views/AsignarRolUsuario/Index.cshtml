@@ -1,18 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "Unidad de Material";
+    ViewBag.Title = "Asignar Rol Usuario";
 }
 <div class="container">
 
     <div class="row">
         <center>
-            <p class="white-text flow-text"><b>UNIDAD DE MATERIAL</b></p>
+            <p class="white-text flow-text"><b>ASIGNAR ROL USUARIO</b></p>
         </center>
         <hr>
         <br>
         <div class="col s12 m12 l12">
             <center>
-                <p class="white-text flow-text">Tabla de unidades de materiales.</p>
+                <p class="white-text flow-text">Asignar rol a usuario.</p>
             </center>
             <a id="btnListar" onclick="CrearDataTable();" class="btn teal waves-effect"><i class="icon-list-numbered"></i>Mostrar</a>
         </div>
@@ -25,7 +25,7 @@
     </div>
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large green" onclick="Nuevo();">
-            <i class="large icon-plus-1"></i>
+            <i class="large icon-user-add"></i>
         </a>
     </div>
 </div>
@@ -35,34 +35,28 @@
         <center>
             <div id="cabeceraModal">
             </div>
+            <input id="id" type="text" hidden value="0">
             <div class="row">
                 <div class="col s12 m12 l12">
                     <div class="input-field col s12">
-                        <p><i class="icon-briefcase"></i>Material:</p>
-                        <div id="campoMaterial"></div>
+                        <p><i class="icon-flow-tree"></i>Usuario:</p>
+                        <div id="campoUsuario"></div>
                     </div>
                 </div>
             </div>
-            Fecha de Ingreso:
             <div class="row">
                 <div class="col s12 m12 l12">
-                    <input type="date" id="selectFecha" class="datepicker">
+                    <div class="input-field col s12">
+                        <p><i class="icon-flow-tree"></i>Rol:</p>
+                        <div id="campoRol"></div>
+                    </div>
                 </div>
             </div>
+
+            Fecha:
             <div class="row">
-                <input id="id" type="text" hidden value="0">
-                <div class="input-field col s12 m12 l12">
-                    <i class="icon-right-dir prefix"></i>
-                    <input id="precio_compra" type="text">
-                    <label for="precio_compra">Precio de Compra (Decimal 0,0)</label>
-                </div>
-            </div>
-            <div class="row">
-                <input id="id" type="text" hidden value="0">
-                <div class="input-field col s12 m12 l12">
-                    <i class="icon-right-dir prefix"></i>
-                    <input id="precio_venta" type="text">
-                    <label for="precio_venta">Precio de Venta (Decimal 0,0)</label>
+                <div class="col s12 m12 l12">
+                    <input type="date" id="fecha" class="datepicker">
                 </div>
             </div>
             <p class="grey-text">Estado:</p>
@@ -100,5 +94,7 @@
     </div>
 </div>
 @section Scripts {
-    @Scripts.Render("~/bundles/unidad_material")
+    @Scripts.Render("~/bundles/asignar_rol_usuario")
 }
+
+

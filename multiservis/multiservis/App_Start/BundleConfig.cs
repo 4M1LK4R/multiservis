@@ -64,6 +64,21 @@ namespace multiservis
             bundles.Add(new ScriptBundle("~/bundles/tecnico").Include(
             "~/Resources/plugins/js/tecnico.js"
             ));
+            bundles.Add(new ScriptBundle("~/bundles/tecnico_area").Include(
+            "~/Resources/plugins/js/tecnico_area.js"
+            ));
+            bundles.Add(new ScriptBundle("~/bundles/usuario").Include(
+            "~/Resources/plugins/js/usuario.js"
+            ));
+            bundles.Add(new ScriptBundle("~/bundles/asignar_rol_usuario").Include(
+            "~/Resources/plugins/js/asignar_rol_usuario.js"
+            ));
+            bundles.Add(new ScriptBundle("~/bundles/detalle_servicio").Include(
+            "~/Resources/plugins/js/detalle_servicio.js"
+            ));
+            bundles.Add(new ScriptBundle("~/bundles/reserva").Include(
+            "~/Resources/plugins/js/reserva.js"
+            ));
         }
     }
 }

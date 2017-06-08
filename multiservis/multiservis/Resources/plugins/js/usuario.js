@@ -1,7 +1,6 @@
 var est = true;
 $(document).ready(function () {
     Listar();
-    $('#salario').numeric();
 })
 
 $('#activo').click(function () {
@@ -54,16 +53,12 @@ function EvaluarVacios() {
         Materialize.toast('Debe establecer el C.I.!', 8000);
         return false;
     }
-    if ($('#nro_seguro').val() == '') {
-        Materialize.toast('Debe establecer el nro de seguro!', 8000);
+    if ($('#nombre_usuario').val() == '') {
+        Materialize.toast('Debe establecer el nombre para el usuario!', 8000);
         return false;
     }
-    if ($('#salario').val() == '') {
-        Materialize.toast('Debe establecer un salario minimo 0!', 8000);
-        return false;
-    }
-    if ($('#fecha_inscripcion').val() == '') {
-        Materialize.toast('Debe establecer la fecha de inscripcion!', 8000);
+    if ($('#password_usuario').val() == '') {
+        Materialize.toast('Debe establecer un password para el usuario!', 8000);
         return false;
     }
     else {
@@ -81,12 +76,11 @@ function Guardar() {
         ci: $('#ci').val(),
         telefono: $('#telefono').val(),
         direccion: $('#direccion').val(),
-        nro_seguro: $('#nro_seguro').val(),
-        salario: $('#salario').val(),
-        fecha_inscripcion: $('#fecha_inscripcion').val(),
+        nombre_usuario: $('#nombre_usuario').val(),
+        password_usuario: $('#password_usuario').val(),
         estado: est
-    };    
-    $.getJSON("/Tecnico/Guardar", o, function (e) {
+    };
+    $.getJSON("/Usuario/Guardar", o, function (e) {
         if (e != "") {
             Materialize.toast(e, 8000);
         }
@@ -101,7 +95,7 @@ function Guardar() {
 };
 function Editar(id) {
     var o = { id: id };
-    $.getJSON("/Tecnico/Get", o, function (obj) {
+    $.getJSON("/Usuario/Get", o, function (obj) {
         var codigo = '<p class="red-text text-darken-3 flow-text">EDITAR ' + obj.nombre + '</p>';
         $('#cabeceraModal').html(codigo);
         $('#id').val(id);
@@ -113,9 +107,8 @@ function Editar(id) {
         $('#ci').val(obj.ci);
         $('#telefono').val(obj.telefono);
         $('#direccion').val(obj.direccion);
-        $('#nro_seguro').val(obj.nro_seguro);
-        $('#salario').val(obj.salario);
-        $('#fecha_inscripcion').val(obj.fecha_inscripcion);
+        $('#nombre_usuario').val(obj.nombre_usuario);
+        $('#password_usuario').val('');
         $('select').material_select();
         est = obj.estado;
         CargarEstadoEnChck(est);
@@ -134,19 +127,19 @@ function LimpiarCampos() {
     $('#ci').val(''),
     $('#telefono').val(''),
     $('#direccion').val(''),
-    $('#nro_seguro').val(''),
-    $('#salario').val(''),
-    $('#fecha_inscripcion').val(''),
+    $('#nombre_usuario').val(''),
+    $('#password_usuario').val(''),
     $('select').material_select();
 };
 
 function Listar() {
-    $.getJSON("/Tecnico/Listar", null, function (cadena) {
+    $.getJSON("/Usuario/Listar", null, function (cadena) {
         $("#tabla").html(cadena);
         CrearDataTable();
     });
     $('#btnListar').show();
 };
+
 
 function ModalConfirmar(id, nom) {
     $('#idEliminar').val(id);
@@ -169,7 +162,7 @@ $('#cancelarEliminar').click(function () {
 
 function Eliminar(id) {
     var o = { id: id };
-    $.getJSON("/Tecnico/Delete", o, function (e) {
+    $.getJSON("/Usuario/Delete", o, function (e) {
         Listar();
     });
 };

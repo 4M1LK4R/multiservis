@@ -46,9 +46,12 @@ nombres varchar(50) not null,
 paterno varchar(50),
 materno varchar(50),
 correo varchar(50),
-nacionalidad varchar(50) not null
+nacionalidad varchar(50) not null,
+telefono varchar(50),
+direccion varchar(50)
 );
 
+/*
 create table telefono(
   id int auto_increment not null primary key,
   persona int not null,
@@ -71,7 +74,7 @@ create table direccion(
   index persona_direccion(persona),
       foreign key(persona)
       references persona(id)
-);
+);*/
 
 create table usuario(
     id int auto_increment not null primary key,
@@ -102,7 +105,7 @@ create table tecnico(
   id int auto_increment not null primary key,
   persona int not null,
   nro_seguro int not null,
-  salario decimal(5,2) not null,
+  salario decimal(8,2) not null,
   fecha_inscripcion date not null,
   estado bit not null,
   index persona_tecnico(persona),
@@ -228,6 +231,7 @@ create table detalle_ficha_material(
     id int auto_increment not null primary key,
     ficha_tecnica int,
     unidad_material int,
+    cantidad int,
     estado bit not null,
     index ficha_tecnica_detalle_ficha_material(ficha_tecnica),
         foreign key(ficha_tecnica)
@@ -241,6 +245,7 @@ create table detalle_ficha_herramienta(
     id int auto_increment not null primary key,
     ficha_tecnica int,
     unidad_herramienta int,
+    cantidad int,
     estado bit not null,
     index ficha_tecnica_detalle_ficha_herramienta(ficha_tecnica),
         foreign key(ficha_tecnica)
