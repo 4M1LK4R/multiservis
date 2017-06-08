@@ -12,6 +12,9 @@ function ListarDetalleServicio() {
 };
 
 function Agregar(id, precio) {
+
+    $('#btnGuardar').removeClass('disabled');;
+
     //var mystring = "this,is,a,test";
     console.log(precio.replace(/,/, "."));
     precio = parseFloat(precio.replace(",", "."));
@@ -29,8 +32,8 @@ function Agregar(id, precio) {
 
         if (arrayID.length==0) {
             CostoTotal = 0;
+            $('#btnGuardar').addClass('disabled');
         }
-
         $('#costoTotal').html(CostoTotal);
         $('#nro').html(arrayID.length);
     }
@@ -49,6 +52,36 @@ function Elimiar(id,array) {
     //arrayID.splice(i,1);
 };
 
+$('#btnGuardar').click(function () {
+    console.log(CostoTotal)
+    ct = CostoTotal.toString();
+    ct = (ct.replace(".", ","));
+    var o = {
+        id:0,
+        persona:"",
+        usuario: "",
+        monto_total:ct,
+        detalles:arrayID.toString(),
+        estado:true
+    };
+    $.getJSON('/Reserva/Guardar', o, function (msg) {
+        if (msg != "") {
+            Materialize.toast(msg, 8000);
+        }
+        else {
+            Materialize.toast('Reserva Exitosa!', 8000);
+            LimpiarCampos();
+        }
+    });
+});
+
+function LimpiarCampos() {
+    $('#costoTotal').html('0,0');
+    $('#nro').html('0');
+    $('#btnGuardar').addClass('disabled');
+    arrayID = [];
+    ListarDetalleServicio();
+};
 
 
 
