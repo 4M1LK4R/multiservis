@@ -79,6 +79,9 @@ namespace multiservis
             bundles.Add(new ScriptBundle("~/bundles/reserva").Include(
             "~/Resources/plugins/js/reserva.js"
             ));
+            bundles.Add(new ScriptBundle("~/bundles/adm_reserva").Include(
+            "~/Resources/plugins/js/adm_reserva.js"
+            ));
         }
     }
 }

@@ -323,6 +323,7 @@
     <Content Include="Resources\plugins\js\material.js" />
     <Content Include="Resources\plugins\js\asignar_rol_usuario.js" />
     <Content Include="Resources\plugins\js\detalle_servicio.js" />
+    <Content Include="Resources\plugins\js\adm_reserva.js" />
     <Content Include="Resources\plugins\js\usuario.js" />
     <Content Include="Resources\plugins\js\tecnico_area.js" />
     <Content Include="Resources\plugins\js\tecnico.js" />

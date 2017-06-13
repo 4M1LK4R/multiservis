@@ -22,6 +22,7 @@ namespace multiservis.Controllers
             cadena += "<tr>";
             cadena += "<th>COD Reserva</th>";
             cadena += "<th>Detalle de Servicio</th>";
+            cadena += "<th>Descripcion</th>";
             cadena += "<th>Tecnico</th>";
             cadena += "<th>Usuario</th>";
             cadena += "<th>Precio</th>";
@@ -33,11 +34,30 @@ namespace multiservis.Controllers
             foreach (var obj in BD.detalle_reserva.ToList())
             {
                 cadena += "<tr>";
-                cadena += "<td>" + obj.reserva+ "</td>";
+                cadena += "<td>" + obj.reserva + "</td>";
                 cadena += "<td>" + obj.detalle_servicio1.nombre + "</td>";
-                cadena += "<td>" + obj.tecnico1.persona1.nombres + "</td>";
-                cadena += "<td>" + obj.reserva1.persona1.nombres + "</td>";
-                cadena += "<td>" + obj.precio+ "</td>";
+                cadena += "<td>" + obj.descripcion + "</td>";
+
+                if (obj.tecnico1 == null)
+                {
+                    cadena += "<td class='red-text'>Pendiente</td>";
+                }
+                else
+                {
+                    cadena += "<td>" + obj.tecnico1.persona1.nombres + "</td>";
+                }
+
+                if (obj.reserva1.persona1 == null)
+                {
+                    cadena += "<td class='red-text'>Pendiente</td>";
+                }
+                else
+                {
+                    cadena += "<td>" + obj.reserva1.persona1.nombres + " " + obj.reserva1.persona1.paterno + " " + obj.reserva1.persona1.materno + "</td>";
+                }
+
+
+                cadena += "<td>" + obj.precio + "</td>";
                 if (obj.estado)
                 {
                     cadena += "<td>Activo</td>";
@@ -56,67 +76,82 @@ namespace multiservis.Controllers
             cadena += "</table>";
             return Json(cadena, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Guardar(int id, int tecnico, int tipo_servicio, string fecha, string especialidad, string nivel, bool estado)
+        public ActionResult Guardar(int id, int tecnico, bool estado)
         {
-            reserva obj;
+            detalle_reserva obj;
             string error = "";
-            try
-            {
-                DateTime d = DateTime.Parse(fecha).Date;
-            }
-            catch
-            {
-                error = "Debe seleccionar una fecha valida!";
-            }
             if (string.IsNullOrEmpty(error))
             {
-                if (id == 0)
-                {
-                    obj = new reserva();
-                    obj.tecnico = tecnico;
-                    obj.tipo_servicio = tipo_servicio;
-                    obj.fecha = DateTime.Parse(fecha).Date;
-                    obj.especialidad = especialidad;
-                    obj.nivel = nivel;
-                    obj.estado = estado;
-                    BD.reserva.Add(obj);
-                    BD.SaveChanges();
-                }
-                else
-                {
-                    obj = BD.reserva.Single(o => o.id == id);
-                    obj.tecnico = tecnico;
-                    obj.tipo_servicio = tipo_servicio;
-                    obj.fecha = DateTime.Parse(fecha).Date;
-                    obj.especialidad = especialidad;
-                    obj.nivel = nivel;
-                    obj.estado = estado;
-                    BD.SaveChanges();
-                }
+                obj = BD.detalle_reserva.Single(o => o.id == id);
+                obj.tecnico = tecnico;
+                obj.estado = estado;
+                BD.SaveChanges();
             }
-
             return Json(error, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Get(int id)
         {
-            reserva obj = BD.reserva.Single(o => o.id == id);
-            var reserva = new
+            detalle_reserva obj = BD.detalle_reserva.Single(o => o.id == id);
+
+
+            if (obj.tecnico1 == null)
             {
-                tecnico = obj.tecnico,
-                tipo_servicio = obj.tipo_servicio,
-                fecha = obj.fecha.ToShortDateString(),
-                especialidad = obj.especialidad,
-                nivel = obj.nivel,
-                estado = obj.estado
-            };
-            return Json(reserva, JsonRequestBehavior.AllowGet);
+                var detalle_reserva = new
+                {
+                    reserva = obj.reserva,
+                    detalle_servicio = obj.detalle_servicio1.nombre,
+                    tecnico_id = "",
+                    tecnico = "",
+                    usuario = "",
+                    precio = obj.precio,
+                    descripcion = obj.descripcion,
+                    estado = obj.estado
+                };
+                return Json(detalle_reserva, JsonRequestBehavior.AllowGet);
+            }
+
+            //Impletar cuando este el login
+            //if (obj.tecnico1 != null && obj.reserva1.persona1 != null)
+            //{
+            //    var detalle_reserva = new
+            //    {
+            //        reserva = obj.reserva,
+            //        detalle_servicio = obj.detalle_servicio1.nombre,
+            //        tecnico_id = obj.tecnico,
+            //        tecnico = obj.tecnico1.persona1.nombres + " " + obj.tecnico1.persona1.paterno + " " + obj.tecnico1.persona1.materno,
+            //        usuario = obj.reserva1.persona1.nombres + " " + obj.reserva1.persona1.paterno + " " + obj.reserva1.persona1.materno,
+            //        precio = obj.precio,
+            //        descripcion = obj.descripcion,
+            //        estado = obj.estado
+            //    };
+            //    return Json(detalle_reserva, JsonRequestBehavior.AllowGet);
+            //}
+
+            if (obj.tecnico1!=null)
+            {
+                var detalle_reserva = new
+                {
+                    reserva = obj.reserva,
+                    detalle_servicio = obj.detalle_servicio1.nombre,
+                    tecnico_id = obj.tecnico,
+                    tecnico = obj.tecnico1.persona1.nombres + " " + obj.tecnico1.persona1.paterno + " " + obj.tecnico1.persona1.materno,
+                    usuario = "",
+                    precio = obj.precio,
+                    descripcion = obj.descripcion,
+                    estado = obj.estado
+                };
+                return Json(detalle_reserva, JsonRequestBehavior.AllowGet);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+
+
         }
         public ActionResult Delete(int id)
         {
             try
             {
-                reserva t = BD.reserva.Single(o => o.id == id);
-                BD.reserva.Remove(t);
+                detalle_reserva d_r = BD.detalle_reserva.Single(o => o.id == id);
+                BD.detalle_reserva.Remove(d_r);
                 BD.SaveChanges();
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
