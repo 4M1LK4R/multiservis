@@ -14,10 +14,6 @@ namespace multiservis.Controllers
         {
             return View();
         }
-        public ActionResult Reserva()
-        {
-            return View();
-        }
         public ActionResult ListarDetalleServicio()
         {
             string cadena = "";
@@ -33,7 +29,7 @@ namespace multiservis.Controllers
                     cadena += "<p><input type='checkbox' id='" + detalle_servicio.id + "' onclick='Agregar(" + detalle_servicio.id + ",\"" + detalle_servicio.precio + "\");'/>";
                     cadena += "<label for='" + detalle_servicio.id + "'>" + detalle_servicio.nombre + "</label></p>";
                     cadena += "<p><span>&nbsp;&nbsp;<b>Costo:</b>&nbsp;" + detalle_servicio.precio + "</span></p>";
-                    cadena += "<p><input data-length='10' placeholder='Descripcion del Problema' class='white' id='des_' type='text'></p>";                    
+                    cadena += "<p><input data-length='10' placeholder='Descripcion del Problema' class='white' id='des_"+detalle_servicio.id+"' type='text'></p>";                    
                     //cadena += "<b>&nbsp;&nbsp;Duración Hrs:</b>&nbsp;" + detalle_servicio.tiempo;
                     cadena += "<hr/>";
                 }
@@ -43,10 +39,11 @@ namespace multiservis.Controllers
             cadena += "</ul>";
             return Json(cadena, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Guardar(int id,string persona,string usuario,string monto_total,string detalles,bool estado)
+        public ActionResult Guardar(int id,string persona,string usuario,string monto_total,string detalles,string descripciones, bool estado)
         {
             reserva obj;
             string msg = "";
+            
             if (string.IsNullOrEmpty(msg))
             {
                 if (id == 0)
@@ -58,12 +55,11 @@ namespace multiservis.Controllers
 
                     obj.persona = null;
                     obj.usuario = null;
-
                     obj.monto_total = Convert.ToDecimal(monto_total);
                     obj.estado = estado;
                     BD.reserva.Add(obj);
                     BD.SaveChanges();
-                    RegistrarDetalleReservaTema(obj, detalles);
+                    RegistrarDetalleReservaTema(obj, detalles, descripciones);
                 }
                 else
                 {
@@ -81,29 +77,34 @@ namespace multiservis.Controllers
                     {
                         BD.detalle_reserva.Remove(item);
                     }
-                    RegistrarDetalleReservaTema(obj, detalles);
+                    RegistrarDetalleReservaTema(obj, detalles, descripciones);
                 }
             }
             
 
             return Json(msg, JsonRequestBehavior.AllowGet);
         }
-        void RegistrarDetalleReservaTema(reserva reserva, string detalles)
+        void RegistrarDetalleReservaTema(reserva reserva, string detalles,string descripciones)
         {
             detalle_reserva obj;
+            string[] array_descripciones = descripciones.Split(new Char[] { ',' });
             string[] split = detalles.Split(new Char[] { ',' });
             for (int i = 0; i < split.Length; i++)
             {
                 obj = new detalle_reserva();
                 obj.reserva = reserva.id;
                 obj.detalle_servicio = int.Parse(split[i]);
+                obj.descripcion = array_descripciones[i];
                 obj.precio = ((detalle_servicio)BD.detalle_servicio.Single(o => o.id == obj.detalle_servicio)).precio;
                 obj.estado = true;
                 BD.detalle_reserva.Add(obj);
                 BD.SaveChanges();
             }
         }
-
+        void CargarDetalle(int id)
+        {
+            Response.Redirect("/Area/");
+        }
         private int id_usu(string usuario)
         {
             int id = 0;

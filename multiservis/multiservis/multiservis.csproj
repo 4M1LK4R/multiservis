@@ -178,6 +178,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdmReservaController.cs" />
     <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\AsignarRolUsuarioController.cs" />
     <Compile Include="Controllers\DetalleServicioController.cs" />
@@ -428,8 +429,8 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\AsignarRolUsuario\Index.cshtml" />
     <Content Include="Views\DetalleServicio\Index.cshtml" />
-    <Content Include="Views\Reserva\Reserva.cshtml" />
     <Content Include="Views\Reserva\Index.cshtml" />
+    <Content Include="Views\AdmReserva\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,7 +2,9 @@
     ListarDetalleServicio();
 });
 
-var arrayID = [],CostoTotal=0,TiempoTotal=0;
+var arrayID = [], CostoTotal = 0, TiempoTotal = 0;
+
+var array_descripciones = [];
 
 function ListarDetalleServicio() {
     $.getJSON('/Reserva/ListarDetalleServicio', function (cadena) {
@@ -11,14 +13,14 @@ function ListarDetalleServicio() {
     });
 };
 
+function CambiarPantalla() {
+    location.href = "/Reserva/CargarDetalle";
+};
+
 function Agregar(id, precio) {
-
     $('#btnGuardar').removeClass('disabled');;
-
-    //var mystring = "this,is,a,test";
     console.log(precio.replace(/,/, "."));
     precio = parseFloat(precio.replace(",", "."));
-    //console.log(id + precio);
     if (document.getElementById(id).checked) {
         //alert('checado');
         arrayID.push(id);
@@ -28,9 +30,10 @@ function Agregar(id, precio) {
     } else {
         //alert('no checado');
         Elimiar(id, arrayID);
+
         CostoTotal -= precio;
 
-        if (arrayID.length==0) {
+        if (arrayID.length == 0) {
             CostoTotal = 0;
             $('#btnGuardar').addClass('disabled');
         }
@@ -41,28 +44,32 @@ function Agregar(id, precio) {
     console.log(CostoTotal);
 };
 
-function Elimiar(id,array) {
+function Elimiar(id, array) {
     var i;
     for (var ii = 0; ii < array.length; ii++) {
-        if (array[ii]==id) {
-            //i=ii;
+        if (array[ii] == id) {
+            array_descripciones.splice(ii, 1);
             arrayID.splice(ii, 1);
+            $('#des_' + ii).val('');
         }
-    }
-    //arrayID.splice(i,1);
+    };
 };
 
 $('#btnGuardar').click(function () {
-    console.log(CostoTotal)
     ct = CostoTotal.toString();
     ct = (ct.replace(".", ","));
+    for (var i = 0; i < arrayID.length ; i++) {
+        console.log($('#des_' + arrayID[i]).val());
+        array_descripciones.push($('#des_' + arrayID[i]).val());
+    };
     var o = {
-        id:0,
-        persona:"",
+        id: 0,
+        persona: "",
         usuario: "",
-        monto_total:ct,
-        detalles:arrayID.toString(),
-        estado:true
+        monto_total: ct,
+        detalles: arrayID.toString(),
+        descripciones: array_descripciones.toString(),
+        estado: true
     };
     $.getJSON('/Reserva/Guardar', o, function (msg) {
         if (msg != "") {
@@ -80,8 +87,11 @@ function LimpiarCampos() {
     $('#nro').html('0');
     $('#btnGuardar').addClass('disabled');
     arrayID = [];
+    array_descripciones = [];
     ListarDetalleServicio();
 };
+
+
 
 
 
