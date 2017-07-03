@@ -217,7 +217,7 @@ create table ficha_tecnica(
     detalle_reserva int,
     usuario_almacen int,
     nro_ficha int,
-    descipcion_problema varchar(90),
+    descripcion_problema varchar(90),
     hora int,
     index detalle_reserva_ficha_tecnica
         foreign key(detalle_reserva)

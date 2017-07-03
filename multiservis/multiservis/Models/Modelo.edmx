@@ -86,7 +86,7 @@
           <Property Name="detalle_reserva" Type="int" />
           <Property Name="usuario_almacen" Type="int" />
           <Property Name="nro_ficha" Type="int" />
-          <Property Name="descipcion_problema" Type="varchar" MaxLength="90" />
+          <Property Name="descripcion_problema" Type="varchar" MaxLength="90" />
           <Property Name="hora" Type="int" />
         </EntityType>
         <EntityType Name="herramienta">
@@ -162,7 +162,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="persona" Type="int" Nullable="false" />
           <Property Name="nro_seguro" Type="int" Nullable="false" />
-          <Property Name="salario" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="salario" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="fecha_inscripcion" Type="date" Nullable="false" />
           <Property Name="estado" Type="bit" Nullable="false" />
         </EntityType>
@@ -678,7 +678,7 @@
           <Property Name="detalle_reserva" Type="Int32" />
           <Property Name="usuario_almacen" Type="Int32" />
           <Property Name="nro_ficha" Type="Int32" />
-          <Property Name="descipcion_problema" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion_problema" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
           <Property Name="hora" Type="Int32" />
           <NavigationProperty Name="detalle_ficha_herramienta" Relationship="Self.detalle_ficha_herramienta_ibfk_1" FromRole="ficha_tecnica" ToRole="detalle_ficha_herramienta" />
           <NavigationProperty Name="detalle_ficha_material" Relationship="Self.detalle_ficha_material_ibfk_1" FromRole="ficha_tecnica" ToRole="detalle_ficha_material" />
@@ -1289,7 +1289,7 @@
                 <ScalarProperty Name="detalle_reserva" ColumnName="detalle_reserva" />
                 <ScalarProperty Name="usuario_almacen" ColumnName="usuario_almacen" />
                 <ScalarProperty Name="nro_ficha" ColumnName="nro_ficha" />
-                <ScalarProperty Name="descipcion_problema" ColumnName="descipcion_problema" />
+                <ScalarProperty Name="descripcion_problema" ColumnName="descripcion_problema" />
                 <ScalarProperty Name="hora" ColumnName="hora" />
               </MappingFragment>
             </EntityTypeMapping>

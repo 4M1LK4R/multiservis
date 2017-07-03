@@ -88,7 +88,7 @@
           <ScalarProperty Name="detalle_reserva" ColumnName="detalle_reserva" />
           <ScalarProperty Name="usuario_almacen" ColumnName="usuario_almacen" />
           <ScalarProperty Name="nro_ficha" ColumnName="nro_ficha" />
-          <ScalarProperty Name="descipcion_problema" ColumnName="descipcion_problema" />
+          <ScalarProperty Name="descripcion_problema" ColumnName="descripcion_problema" />
           <ScalarProperty Name="hora" ColumnName="hora" />
         </MappingFragment>
       </EntityTypeMapping>

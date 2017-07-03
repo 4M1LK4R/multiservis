@@ -81,7 +81,7 @@
     <Property Name="detalle_reserva" Type="int" />
     <Property Name="usuario_almacen" Type="int" />
     <Property Name="nro_ficha" Type="int" />
-    <Property Name="descipcion_problema" Type="varchar" MaxLength="90" />
+    <Property Name="descripcion_problema" Type="varchar" MaxLength="90" />
     <Property Name="hora" Type="int" />
   </EntityType>
   <EntityType Name="herramienta">
@@ -157,7 +157,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="persona" Type="int" Nullable="false" />
     <Property Name="nro_seguro" Type="int" Nullable="false" />
-    <Property Name="salario" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="salario" Type="decimal" Precision="8" Scale="2" Nullable="false" />
     <Property Name="fecha_inscripcion" Type="date" Nullable="false" />
     <Property Name="estado" Type="bit" Nullable="false" />
   </EntityType>

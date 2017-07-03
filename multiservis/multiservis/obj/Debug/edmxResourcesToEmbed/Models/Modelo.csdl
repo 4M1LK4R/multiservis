@@ -96,7 +96,7 @@
     <Property Name="detalle_reserva" Type="Int32" />
     <Property Name="usuario_almacen" Type="Int32" />
     <Property Name="nro_ficha" Type="Int32" />
-    <Property Name="descipcion_problema" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion_problema" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
     <Property Name="hora" Type="Int32" />
     <NavigationProperty Name="detalle_ficha_herramienta" Relationship="Self.detalle_ficha_herramienta_ibfk_1" FromRole="ficha_tecnica" ToRole="detalle_ficha_herramienta" />
     <NavigationProperty Name="detalle_ficha_material" Relationship="Self.detalle_ficha_material_ibfk_1" FromRole="ficha_tecnica" ToRole="detalle_ficha_material" />

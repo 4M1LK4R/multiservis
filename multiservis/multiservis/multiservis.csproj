@@ -182,6 +182,7 @@
     <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\AsignarRolUsuarioController.cs" />
     <Compile Include="Controllers\DetalleServicioController.cs" />
+    <Compile Include="Controllers\FichaTecnicaController.cs" />
     <Compile Include="Controllers\HerramientaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -324,6 +325,7 @@
     <Content Include="Resources\plugins\js\asignar_rol_usuario.js" />
     <Content Include="Resources\plugins\js\detalle_servicio.js" />
     <Content Include="Resources\plugins\js\adm_reserva.js" />
+    <Content Include="Resources\plugins\js\ficha_tecnica.js" />
     <Content Include="Resources\plugins\js\usuario.js" />
     <Content Include="Resources\plugins\js\tecnico_area.js" />
     <Content Include="Resources\plugins\js\tecnico.js" />
@@ -432,6 +434,7 @@
     <Content Include="Views\DetalleServicio\Index.cshtml" />
     <Content Include="Views\Reserva\Index.cshtml" />
     <Content Include="Views\AdmReserva\Index.cshtml" />
+    <Content Include="Views\FichaTecnica\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

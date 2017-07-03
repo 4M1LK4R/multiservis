@@ -25,7 +25,7 @@ namespace multiservis.Models
         public Nullable<int> detalle_reserva { get; set; }
         public Nullable<int> usuario_almacen { get; set; }
         public Nullable<int> nro_ficha { get; set; }
-        public string descipcion_problema { get; set; }
+        public string descripcion_problema { get; set; }
         public Nullable<int> hora { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
