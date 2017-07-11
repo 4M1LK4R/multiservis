@@ -7,7 +7,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="servicio" Relationship="Self.servicio_ibfk_1" FromRole="area" ToRole="servicio" />
+    <NavigationProperty Name="servicio" Relationship="Self.area_servicio" FromRole="area" ToRole="servicio" />
   </EntityType>
   <EntityType Name="asignar_rol_usuario">
     <Key>
@@ -16,10 +16,10 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="rol" Type="Int32" Nullable="false" />
     <Property Name="usuario" Type="Int32" Nullable="false" />
-    <Property Name="fecha_asigna" Type="DateTime" Nullable="false" />
+    <Property Name="fecha_asigna" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="rol1" Relationship="Self.asignar_rol_usuario_ibfk_1" FromRole="asignar_rol_usuario" ToRole="rol" />
-    <NavigationProperty Name="usuario1" Relationship="Self.asignar_rol_usuario_ibfk_2" FromRole="asignar_rol_usuario" ToRole="usuario" />
+    <NavigationProperty Name="rol1" Relationship="Self.rol_asignar_rol_usuario" FromRole="asignar_rol_usuario" ToRole="rol" />
+    <NavigationProperty Name="usuario1" Relationship="Self.usuario_asignar_rol_usuario" FromRole="asignar_rol_usuario" ToRole="usuario" />
   </EntityType>
   <EntityType Name="control">
     <Key>
@@ -27,11 +27,11 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="detalle_reserva" Type="Int32" Nullable="false" />
-    <Property Name="fecha_inicio" Type="DateTime" />
-    <Property Name="fecha_fin" Type="DateTime" />
+    <Property Name="fecha_inicio" Type="DateTime" Precision="0" />
+    <Property Name="fecha_fin" Type="DateTime" Precision="0" />
     <Property Name="observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="detalle_reserva1" Relationship="Self.control_ibfk_1" FromRole="control" ToRole="detalle_reserva" />
+    <NavigationProperty Name="detalle_reserva1" Relationship="Self.detalle_reserva_control" FromRole="control" ToRole="detalle_reserva" />
   </EntityType>
   <EntityType Name="detalle_ficha_herramienta">
     <Key>
@@ -42,8 +42,8 @@
     <Property Name="unidad_herramienta" Type="Int32" />
     <Property Name="cantidad" Type="Int32" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="ficha_tecnica1" Relationship="Self.detalle_ficha_herramienta_ibfk_1" FromRole="detalle_ficha_herramienta" ToRole="ficha_tecnica" />
-    <NavigationProperty Name="unidad_herramienta1" Relationship="Self.detalle_ficha_herramienta_ibfk_2" FromRole="detalle_ficha_herramienta" ToRole="unidad_herramienta" />
+    <NavigationProperty Name="ficha_tecnica1" Relationship="Self.ficha_tecnica_detalle_ficha_herramienta" FromRole="detalle_ficha_herramienta" ToRole="ficha_tecnica" />
+    <NavigationProperty Name="unidad_herramienta1" Relationship="Self.unidad_herramienta_detalle_ficha_herramienta" FromRole="detalle_ficha_herramienta" ToRole="unidad_herramienta" />
   </EntityType>
   <EntityType Name="detalle_ficha_material">
     <Key>
@@ -54,8 +54,8 @@
     <Property Name="unidad_material" Type="Int32" />
     <Property Name="cantidad" Type="Int32" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="ficha_tecnica1" Relationship="Self.detalle_ficha_material_ibfk_1" FromRole="detalle_ficha_material" ToRole="ficha_tecnica" />
-    <NavigationProperty Name="unidad_material1" Relationship="Self.detalle_ficha_material_ibfk_2" FromRole="detalle_ficha_material" ToRole="unidad_material" />
+    <NavigationProperty Name="ficha_tecnica1" Relationship="Self.ficha_tecnica_detalle_ficha_material" FromRole="detalle_ficha_material" ToRole="ficha_tecnica" />
+    <NavigationProperty Name="unidad_material1" Relationship="Self.unidad_material_detalle_ficha_material" FromRole="detalle_ficha_material" ToRole="unidad_material" />
   </EntityType>
   <EntityType Name="detalle_reserva">
     <Key>
@@ -66,14 +66,14 @@
     <Property Name="detalle_servicio" Type="Int32" />
     <Property Name="tecnico" Type="Int32" />
     <Property Name="usuario" Type="Int32" />
-    <Property Name="precio" Type="Decimal" />
+    <Property Name="precio" Type="Decimal" Precision="8" Scale="2" />
     <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="control" Relationship="Self.control_ibfk_1" FromRole="detalle_reserva" ToRole="control" />
-    <NavigationProperty Name="reserva1" Relationship="Self.detalle_reserva_ibfk_1" FromRole="detalle_reserva" ToRole="reserva" />
-    <NavigationProperty Name="detalle_servicio1" Relationship="Self.detalle_reserva_ibfk_2" FromRole="detalle_reserva" ToRole="detalle_servicio" />
-    <NavigationProperty Name="tecnico1" Relationship="Self.detalle_reserva_ibfk_3" FromRole="detalle_reserva" ToRole="tecnico" />
-    <NavigationProperty Name="ficha_tecnica" Relationship="Self.ficha_tecnica_ibfk_1" FromRole="detalle_reserva" ToRole="ficha_tecnica" />
+    <NavigationProperty Name="control" Relationship="Self.detalle_reserva_control" FromRole="detalle_reserva" ToRole="control" />
+    <NavigationProperty Name="ficha_tecnica" Relationship="Self.detalle_reserva_ficha_tecnica" FromRole="detalle_reserva" ToRole="ficha_tecnica" />
+    <NavigationProperty Name="detalle_servicio1" Relationship="Self.detalle_servicio_detalle_reserva" FromRole="detalle_reserva" ToRole="detalle_servicio" />
+    <NavigationProperty Name="reserva1" Relationship="Self.reserva_detalle_reserva" FromRole="detalle_reserva" ToRole="reserva" />
+    <NavigationProperty Name="tecnico1" Relationship="Self.tecnico_detalle_reserva" FromRole="detalle_reserva" ToRole="tecnico" />
   </EntityType>
   <EntityType Name="detalle_servicio">
     <Key>
@@ -82,11 +82,11 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="servicio" Type="Int32" Nullable="false" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="precio" Type="Decimal" Nullable="false" />
+    <Property Name="precio" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
     <Property Name="tiempo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="detalle_reserva" Relationship="Self.detalle_reserva_ibfk_2" FromRole="detalle_servicio" ToRole="detalle_reserva" />
-    <NavigationProperty Name="servicio1" Relationship="Self.detalle_servicio_ibfk_1" FromRole="detalle_servicio" ToRole="servicio" />
+    <NavigationProperty Name="detalle_reserva" Relationship="Self.detalle_servicio_detalle_reserva" FromRole="detalle_servicio" ToRole="detalle_reserva" />
+    <NavigationProperty Name="servicio1" Relationship="Self.servicio_detalle_servicio" FromRole="detalle_servicio" ToRole="servicio" />
   </EntityType>
   <EntityType Name="ficha_tecnica">
     <Key>
@@ -98,9 +98,9 @@
     <Property Name="nro_ficha" Type="Int32" />
     <Property Name="descripcion_problema" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
     <Property Name="hora" Type="Int32" />
-    <NavigationProperty Name="detalle_ficha_herramienta" Relationship="Self.detalle_ficha_herramienta_ibfk_1" FromRole="ficha_tecnica" ToRole="detalle_ficha_herramienta" />
-    <NavigationProperty Name="detalle_ficha_material" Relationship="Self.detalle_ficha_material_ibfk_1" FromRole="ficha_tecnica" ToRole="detalle_ficha_material" />
-    <NavigationProperty Name="detalle_reserva1" Relationship="Self.ficha_tecnica_ibfk_1" FromRole="ficha_tecnica" ToRole="detalle_reserva" />
+    <NavigationProperty Name="detalle_ficha_herramienta" Relationship="Self.ficha_tecnica_detalle_ficha_herramienta" FromRole="ficha_tecnica" ToRole="detalle_ficha_herramienta" />
+    <NavigationProperty Name="detalle_ficha_material" Relationship="Self.ficha_tecnica_detalle_ficha_material" FromRole="ficha_tecnica" ToRole="detalle_ficha_material" />
+    <NavigationProperty Name="detalle_reserva1" Relationship="Self.detalle_reserva_ficha_tecnica" FromRole="ficha_tecnica" ToRole="detalle_reserva" />
   </EntityType>
   <EntityType Name="herramienta">
     <Key>
@@ -109,7 +109,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="id_servicio" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="unidad_herramienta" Relationship="Self.unidad_herramienta_ibfk_1" FromRole="herramienta" ToRole="unidad_herramienta" />
+    <NavigationProperty Name="unidad_herramienta" Relationship="Self.herramienta_unidad_herramienta" FromRole="herramienta" ToRole="unidad_herramienta" />
   </EntityType>
   <EntityType Name="material">
     <Key>
@@ -118,7 +118,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="id_servicio" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="unidad_material" Relationship="Self.unidad_material_ibfk_1" FromRole="material" ToRole="unidad_material" />
+    <NavigationProperty Name="unidad_material" Relationship="Self.material_unidad_material" FromRole="material" ToRole="unidad_material" />
   </EntityType>
   <EntityType Name="persona">
     <Key>
@@ -133,9 +133,9 @@
     <Property Name="nacionalidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="reserva" Relationship="Self.reserva_ibfk_1" FromRole="persona" ToRole="reserva" />
-    <NavigationProperty Name="tecnico" Relationship="Self.tecnico_ibfk_1" FromRole="persona" ToRole="tecnico" />
-    <NavigationProperty Name="usuario" Relationship="Self.usuario_ibfk_1" FromRole="persona" ToRole="usuario" />
+    <NavigationProperty Name="reserva" Relationship="Self.persona_reserva" FromRole="persona" ToRole="reserva" />
+    <NavigationProperty Name="tecnico" Relationship="Self.persona_tecnico" FromRole="persona" ToRole="tecnico" />
+    <NavigationProperty Name="usuario" Relationship="Self.persona_usuario" FromRole="persona" ToRole="usuario" />
   </EntityType>
   <EntityType Name="privilegio">
     <Key>
@@ -145,7 +145,7 @@
     <Property Name="rol" Type="Int32" Nullable="false" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="rol1" Relationship="Self.privilegio_ibfk_1" FromRole="privilegio" ToRole="rol" />
+    <NavigationProperty Name="rol1" Relationship="Self.rol_privilegio" FromRole="privilegio" ToRole="rol" />
   </EntityType>
   <EntityType Name="reserva">
     <Key>
@@ -154,10 +154,10 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="persona" Type="Int32" />
     <Property Name="usuario" Type="Int32" />
-    <Property Name="monto_total" Type="Decimal" />
+    <Property Name="monto_total" Type="Decimal" Precision="8" Scale="2" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="detalle_reserva" Relationship="Self.detalle_reserva_ibfk_1" FromRole="reserva" ToRole="detalle_reserva" />
-    <NavigationProperty Name="persona1" Relationship="Self.reserva_ibfk_1" FromRole="reserva" ToRole="persona" />
+    <NavigationProperty Name="detalle_reserva" Relationship="Self.reserva_detalle_reserva" FromRole="reserva" ToRole="detalle_reserva" />
+    <NavigationProperty Name="persona1" Relationship="Self.persona_reserva" FromRole="reserva" ToRole="persona" />
   </EntityType>
   <EntityType Name="rol">
     <Key>
@@ -166,8 +166,8 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="asignar_rol_usuario" Relationship="Self.asignar_rol_usuario_ibfk_1" FromRole="rol" ToRole="asignar_rol_usuario" />
-    <NavigationProperty Name="privilegio" Relationship="Self.privilegio_ibfk_1" FromRole="rol" ToRole="privilegio" />
+    <NavigationProperty Name="asignar_rol_usuario" Relationship="Self.rol_asignar_rol_usuario" FromRole="rol" ToRole="asignar_rol_usuario" />
+    <NavigationProperty Name="privilegio" Relationship="Self.rol_privilegio" FromRole="rol" ToRole="privilegio" />
   </EntityType>
   <EntityType Name="servicio">
     <Key>
@@ -177,22 +177,23 @@
     <Property Name="area" Type="Int32" Nullable="false" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="area1" Relationship="Self.servicio_ibfk_1" FromRole="servicio" ToRole="area" />
-    <NavigationProperty Name="detalle_servicio" Relationship="Self.detalle_servicio_ibfk_1" FromRole="servicio" ToRole="detalle_servicio" />
+    <NavigationProperty Name="area1" Relationship="Self.area_servicio" FromRole="servicio" ToRole="area" />
+    <NavigationProperty Name="detalle_servicio" Relationship="Self.servicio_detalle_servicio" FromRole="servicio" ToRole="detalle_servicio" />
   </EntityType>
   <EntityType Name="tecnico">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ruta_imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="persona" Type="Int32" Nullable="false" />
     <Property Name="nro_seguro" Type="Int32" Nullable="false" />
-    <Property Name="salario" Type="Decimal" Nullable="false" />
-    <Property Name="fecha_inscripcion" Type="DateTime" Nullable="false" />
+    <Property Name="salario" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="fecha_inscripcion" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="detalle_reserva" Relationship="Self.detalle_reserva_ibfk_3" FromRole="tecnico" ToRole="detalle_reserva" />
-    <NavigationProperty Name="persona1" Relationship="Self.tecnico_ibfk_1" FromRole="tecnico" ToRole="persona" />
-    <NavigationProperty Name="tecnico_area" Relationship="Self.tecnico_area_ibfk_1" FromRole="tecnico" ToRole="tecnico_area" />
+    <NavigationProperty Name="detalle_reserva" Relationship="Self.tecnico_detalle_reserva" FromRole="tecnico" ToRole="detalle_reserva" />
+    <NavigationProperty Name="persona1" Relationship="Self.persona_tecnico" FromRole="tecnico" ToRole="persona" />
+    <NavigationProperty Name="tecnico_area" Relationship="Self.tecnico_tecnico_area" FromRole="tecnico" ToRole="tecnico_area" />
   </EntityType>
   <EntityType Name="tecnico_area">
     <Key>
@@ -201,12 +202,12 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tecnico" Type="Int32" Nullable="false" />
     <Property Name="tipo_servicio" Type="Int32" Nullable="false" />
-    <Property Name="fecha" Type="DateTime" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="especialidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nivel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="tecnico1" Relationship="Self.tecnico_area_ibfk_1" FromRole="tecnico_area" ToRole="tecnico" />
-    <NavigationProperty Name="tipo_servicio1" Relationship="Self.tecnico_area_ibfk_2" FromRole="tecnico_area" ToRole="tipo_servicio" />
+    <NavigationProperty Name="tecnico1" Relationship="Self.tecnico_tecnico_area" FromRole="tecnico_area" ToRole="tecnico" />
+    <NavigationProperty Name="tipo_servicio1" Relationship="Self.tipo_servicio_tecnico_area" FromRole="tecnico_area" ToRole="tipo_servicio" />
   </EntityType>
   <EntityType Name="tipo_servicio">
     <Key>
@@ -215,7 +216,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="tecnico_area" Relationship="Self.tecnico_area_ibfk_2" FromRole="tipo_servicio" ToRole="tecnico_area" />
+    <NavigationProperty Name="tecnico_area" Relationship="Self.tipo_servicio_tecnico_area" FromRole="tipo_servicio" ToRole="tecnico_area" />
   </EntityType>
   <EntityType Name="unidad_herramienta">
     <Key>
@@ -223,12 +224,12 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="herramienta" Type="Int32" Nullable="false" />
-    <Property Name="precio_compra" Type="Decimal" Nullable="false" />
-    <Property Name="precio_venta" Type="Decimal" Nullable="false" />
-    <Property Name="fecha_ingreso" Type="DateTime" Nullable="false" />
+    <Property Name="precio_compra" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="precio_venta" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="fecha_ingreso" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="detalle_ficha_herramienta" Relationship="Self.detalle_ficha_herramienta_ibfk_2" FromRole="unidad_herramienta" ToRole="detalle_ficha_herramienta" />
-    <NavigationProperty Name="herramienta1" Relationship="Self.unidad_herramienta_ibfk_1" FromRole="unidad_herramienta" ToRole="herramienta" />
+    <NavigationProperty Name="detalle_ficha_herramienta" Relationship="Self.unidad_herramienta_detalle_ficha_herramienta" FromRole="unidad_herramienta" ToRole="detalle_ficha_herramienta" />
+    <NavigationProperty Name="herramienta1" Relationship="Self.herramienta_unidad_herramienta" FromRole="unidad_herramienta" ToRole="herramienta" />
   </EntityType>
   <EntityType Name="unidad_material">
     <Key>
@@ -236,12 +237,12 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="material" Type="Int32" Nullable="false" />
-    <Property Name="precio_compra" Type="Decimal" Nullable="false" />
-    <Property Name="precio_venta" Type="Decimal" Nullable="false" />
-    <Property Name="fecha_ingreso" Type="DateTime" Nullable="false" />
+    <Property Name="precio_compra" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="precio_venta" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="fecha_ingreso" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="detalle_ficha_material" Relationship="Self.detalle_ficha_material_ibfk_2" FromRole="unidad_material" ToRole="detalle_ficha_material" />
-    <NavigationProperty Name="material1" Relationship="Self.unidad_material_ibfk_1" FromRole="unidad_material" ToRole="material" />
+    <NavigationProperty Name="detalle_ficha_material" Relationship="Self.unidad_material_detalle_ficha_material" FromRole="unidad_material" ToRole="detalle_ficha_material" />
+    <NavigationProperty Name="material1" Relationship="Self.material_unidad_material" FromRole="unidad_material" ToRole="material" />
   </EntityType>
   <EntityType Name="usuario">
     <Key>
@@ -252,10 +253,10 @@
     <Property Name="nombre_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="pasword_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="estado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="asignar_rol_usuario" Relationship="Self.asignar_rol_usuario_ibfk_2" FromRole="usuario" ToRole="asignar_rol_usuario" />
-    <NavigationProperty Name="persona1" Relationship="Self.usuario_ibfk_1" FromRole="usuario" ToRole="persona" />
+    <NavigationProperty Name="asignar_rol_usuario" Relationship="Self.usuario_asignar_rol_usuario" FromRole="usuario" ToRole="asignar_rol_usuario" />
+    <NavigationProperty Name="persona1" Relationship="Self.persona_usuario" FromRole="usuario" ToRole="persona" />
   </EntityType>
-  <Association Name="servicio_ibfk_1">
+  <Association Name="area_servicio">
     <End Role="area" Type="Self.area" Multiplicity="1" />
     <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
     <ReferentialConstraint>
@@ -267,7 +268,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="asignar_rol_usuario_ibfk_1">
+  <Association Name="rol_asignar_rol_usuario">
     <End Role="rol" Type="Self.rol" Multiplicity="1" />
     <End Role="asignar_rol_usuario" Type="Self.asignar_rol_usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -279,7 +280,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="asignar_rol_usuario_ibfk_2">
+  <Association Name="usuario_asignar_rol_usuario">
     <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
     <End Role="asignar_rol_usuario" Type="Self.asignar_rol_usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -291,7 +292,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="control_ibfk_1">
+  <Association Name="detalle_reserva_control">
     <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="1" />
     <End Role="control" Type="Self.control" Multiplicity="*" />
     <ReferentialConstraint>
@@ -303,7 +304,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="detalle_ficha_herramienta_ibfk_1">
+  <Association Name="ficha_tecnica_detalle_ficha_herramienta">
     <End Role="ficha_tecnica" Type="Self.ficha_tecnica" Multiplicity="0..1" />
     <End Role="detalle_ficha_herramienta" Type="Self.detalle_ficha_herramienta" Multiplicity="*" />
     <ReferentialConstraint>
@@ -315,7 +316,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="detalle_ficha_herramienta_ibfk_2">
+  <Association Name="unidad_herramienta_detalle_ficha_herramienta">
     <End Role="unidad_herramienta" Type="Self.unidad_herramienta" Multiplicity="0..1" />
     <End Role="detalle_ficha_herramienta" Type="Self.detalle_ficha_herramienta" Multiplicity="*" />
     <ReferentialConstraint>
@@ -327,7 +328,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="detalle_ficha_material_ibfk_1">
+  <Association Name="ficha_tecnica_detalle_ficha_material">
     <End Role="ficha_tecnica" Type="Self.ficha_tecnica" Multiplicity="0..1" />
     <End Role="detalle_ficha_material" Type="Self.detalle_ficha_material" Multiplicity="*" />
     <ReferentialConstraint>
@@ -339,7 +340,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="detalle_ficha_material_ibfk_2">
+  <Association Name="unidad_material_detalle_ficha_material">
     <End Role="unidad_material" Type="Self.unidad_material" Multiplicity="0..1" />
     <End Role="detalle_ficha_material" Type="Self.detalle_ficha_material" Multiplicity="*" />
     <ReferentialConstraint>
@@ -351,43 +352,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="detalle_reserva_ibfk_1">
-    <End Role="reserva" Type="Self.reserva" Multiplicity="0..1" />
-    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="reserva">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_reserva">
-        <PropertyRef Name="reserva" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="detalle_reserva_ibfk_2">
-    <End Role="detalle_servicio" Type="Self.detalle_servicio" Multiplicity="0..1" />
-    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="detalle_servicio">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_reserva">
-        <PropertyRef Name="detalle_servicio" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="detalle_reserva_ibfk_3">
-    <End Role="tecnico" Type="Self.tecnico" Multiplicity="0..1" />
-    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tecnico">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_reserva">
-        <PropertyRef Name="tecnico" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ficha_tecnica_ibfk_1">
+  <Association Name="detalle_reserva_ficha_tecnica">
     <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="0..1" />
     <End Role="ficha_tecnica" Type="Self.ficha_tecnica" Multiplicity="*" />
     <ReferentialConstraint>
@@ -399,7 +364,43 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="detalle_servicio_ibfk_1">
+  <Association Name="detalle_servicio_detalle_reserva">
+    <End Role="detalle_servicio" Type="Self.detalle_servicio" Multiplicity="0..1" />
+    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="detalle_servicio">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_reserva">
+        <PropertyRef Name="detalle_servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="reserva_detalle_reserva">
+    <End Role="reserva" Type="Self.reserva" Multiplicity="0..1" />
+    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="reserva">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_reserva">
+        <PropertyRef Name="reserva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tecnico_detalle_reserva">
+    <End Role="tecnico" Type="Self.tecnico" Multiplicity="0..1" />
+    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tecnico">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_reserva">
+        <PropertyRef Name="tecnico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="servicio_detalle_servicio">
     <End Role="servicio" Type="Self.servicio" Multiplicity="1" />
     <End Role="detalle_servicio" Type="Self.detalle_servicio" Multiplicity="*" />
     <ReferentialConstraint>
@@ -411,7 +412,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="unidad_herramienta_ibfk_1">
+  <Association Name="herramienta_unidad_herramienta">
     <End Role="herramienta" Type="Self.herramienta" Multiplicity="1" />
     <End Role="unidad_herramienta" Type="Self.unidad_herramienta" Multiplicity="*" />
     <ReferentialConstraint>
@@ -423,7 +424,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="unidad_material_ibfk_1">
+  <Association Name="material_unidad_material">
     <End Role="material" Type="Self.material" Multiplicity="1" />
     <End Role="unidad_material" Type="Self.unidad_material" Multiplicity="*" />
     <ReferentialConstraint>
@@ -435,7 +436,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="reserva_ibfk_1">
+  <Association Name="persona_reserva">
     <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
     <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
     <ReferentialConstraint>
@@ -447,7 +448,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="tecnico_ibfk_1">
+  <Association Name="persona_tecnico">
     <End Role="persona" Type="Self.persona" Multiplicity="1" />
     <End Role="tecnico" Type="Self.tecnico" Multiplicity="*" />
     <ReferentialConstraint>
@@ -459,7 +460,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="usuario_ibfk_1">
+  <Association Name="persona_usuario">
     <End Role="persona" Type="Self.persona" Multiplicity="1" />
     <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -471,7 +472,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="privilegio_ibfk_1">
+  <Association Name="rol_privilegio">
     <End Role="rol" Type="Self.rol" Multiplicity="1" />
     <End Role="privilegio" Type="Self.privilegio" Multiplicity="*" />
     <ReferentialConstraint>
@@ -483,7 +484,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="tecnico_area_ibfk_1">
+  <Association Name="tecnico_tecnico_area">
     <End Role="tecnico" Type="Self.tecnico" Multiplicity="1" />
     <End Role="tecnico_area" Type="Self.tecnico_area" Multiplicity="*" />
     <ReferentialConstraint>
@@ -495,7 +496,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="tecnico_area_ibfk_2">
+  <Association Name="tipo_servicio_tecnico_area">
     <End Role="tipo_servicio" Type="Self.tipo_servicio" Multiplicity="1" />
     <End Role="tecnico_area" Type="Self.tecnico_area" Multiplicity="*" />
     <ReferentialConstraint>
@@ -529,87 +530,87 @@
     <EntitySet Name="unidad_herramienta" EntityType="Self.unidad_herramienta" />
     <EntitySet Name="unidad_material" EntityType="Self.unidad_material" />
     <EntitySet Name="usuario" EntityType="Self.usuario" />
-    <AssociationSet Name="servicio_ibfk_1" Association="Self.servicio_ibfk_1">
+    <AssociationSet Name="area_servicio" Association="Self.area_servicio">
       <End Role="area" EntitySet="area" />
       <End Role="servicio" EntitySet="servicio" />
     </AssociationSet>
-    <AssociationSet Name="asignar_rol_usuario_ibfk_1" Association="Self.asignar_rol_usuario_ibfk_1">
+    <AssociationSet Name="rol_asignar_rol_usuario" Association="Self.rol_asignar_rol_usuario">
       <End Role="rol" EntitySet="rol" />
       <End Role="asignar_rol_usuario" EntitySet="asignar_rol_usuario" />
     </AssociationSet>
-    <AssociationSet Name="asignar_rol_usuario_ibfk_2" Association="Self.asignar_rol_usuario_ibfk_2">
+    <AssociationSet Name="usuario_asignar_rol_usuario" Association="Self.usuario_asignar_rol_usuario">
       <End Role="usuario" EntitySet="usuario" />
       <End Role="asignar_rol_usuario" EntitySet="asignar_rol_usuario" />
     </AssociationSet>
-    <AssociationSet Name="control_ibfk_1" Association="Self.control_ibfk_1">
+    <AssociationSet Name="detalle_reserva_control" Association="Self.detalle_reserva_control">
       <End Role="detalle_reserva" EntitySet="detalle_reserva" />
       <End Role="control" EntitySet="control" />
     </AssociationSet>
-    <AssociationSet Name="detalle_ficha_herramienta_ibfk_1" Association="Self.detalle_ficha_herramienta_ibfk_1">
+    <AssociationSet Name="ficha_tecnica_detalle_ficha_herramienta" Association="Self.ficha_tecnica_detalle_ficha_herramienta">
       <End Role="ficha_tecnica" EntitySet="ficha_tecnica" />
       <End Role="detalle_ficha_herramienta" EntitySet="detalle_ficha_herramienta" />
     </AssociationSet>
-    <AssociationSet Name="detalle_ficha_herramienta_ibfk_2" Association="Self.detalle_ficha_herramienta_ibfk_2">
+    <AssociationSet Name="unidad_herramienta_detalle_ficha_herramienta" Association="Self.unidad_herramienta_detalle_ficha_herramienta">
       <End Role="unidad_herramienta" EntitySet="unidad_herramienta" />
       <End Role="detalle_ficha_herramienta" EntitySet="detalle_ficha_herramienta" />
     </AssociationSet>
-    <AssociationSet Name="detalle_ficha_material_ibfk_1" Association="Self.detalle_ficha_material_ibfk_1">
+    <AssociationSet Name="ficha_tecnica_detalle_ficha_material" Association="Self.ficha_tecnica_detalle_ficha_material">
       <End Role="ficha_tecnica" EntitySet="ficha_tecnica" />
       <End Role="detalle_ficha_material" EntitySet="detalle_ficha_material" />
     </AssociationSet>
-    <AssociationSet Name="detalle_ficha_material_ibfk_2" Association="Self.detalle_ficha_material_ibfk_2">
+    <AssociationSet Name="unidad_material_detalle_ficha_material" Association="Self.unidad_material_detalle_ficha_material">
       <End Role="unidad_material" EntitySet="unidad_material" />
       <End Role="detalle_ficha_material" EntitySet="detalle_ficha_material" />
     </AssociationSet>
-    <AssociationSet Name="detalle_reserva_ibfk_1" Association="Self.detalle_reserva_ibfk_1">
-      <End Role="reserva" EntitySet="reserva" />
-      <End Role="detalle_reserva" EntitySet="detalle_reserva" />
-    </AssociationSet>
-    <AssociationSet Name="detalle_reserva_ibfk_2" Association="Self.detalle_reserva_ibfk_2">
-      <End Role="detalle_servicio" EntitySet="detalle_servicio" />
-      <End Role="detalle_reserva" EntitySet="detalle_reserva" />
-    </AssociationSet>
-    <AssociationSet Name="detalle_reserva_ibfk_3" Association="Self.detalle_reserva_ibfk_3">
-      <End Role="tecnico" EntitySet="tecnico" />
-      <End Role="detalle_reserva" EntitySet="detalle_reserva" />
-    </AssociationSet>
-    <AssociationSet Name="ficha_tecnica_ibfk_1" Association="Self.ficha_tecnica_ibfk_1">
+    <AssociationSet Name="detalle_reserva_ficha_tecnica" Association="Self.detalle_reserva_ficha_tecnica">
       <End Role="detalle_reserva" EntitySet="detalle_reserva" />
       <End Role="ficha_tecnica" EntitySet="ficha_tecnica" />
     </AssociationSet>
-    <AssociationSet Name="detalle_servicio_ibfk_1" Association="Self.detalle_servicio_ibfk_1">
+    <AssociationSet Name="detalle_servicio_detalle_reserva" Association="Self.detalle_servicio_detalle_reserva">
+      <End Role="detalle_servicio" EntitySet="detalle_servicio" />
+      <End Role="detalle_reserva" EntitySet="detalle_reserva" />
+    </AssociationSet>
+    <AssociationSet Name="reserva_detalle_reserva" Association="Self.reserva_detalle_reserva">
+      <End Role="reserva" EntitySet="reserva" />
+      <End Role="detalle_reserva" EntitySet="detalle_reserva" />
+    </AssociationSet>
+    <AssociationSet Name="tecnico_detalle_reserva" Association="Self.tecnico_detalle_reserva">
+      <End Role="tecnico" EntitySet="tecnico" />
+      <End Role="detalle_reserva" EntitySet="detalle_reserva" />
+    </AssociationSet>
+    <AssociationSet Name="servicio_detalle_servicio" Association="Self.servicio_detalle_servicio">
       <End Role="servicio" EntitySet="servicio" />
       <End Role="detalle_servicio" EntitySet="detalle_servicio" />
     </AssociationSet>
-    <AssociationSet Name="unidad_herramienta_ibfk_1" Association="Self.unidad_herramienta_ibfk_1">
+    <AssociationSet Name="herramienta_unidad_herramienta" Association="Self.herramienta_unidad_herramienta">
       <End Role="herramienta" EntitySet="herramienta" />
       <End Role="unidad_herramienta" EntitySet="unidad_herramienta" />
     </AssociationSet>
-    <AssociationSet Name="unidad_material_ibfk_1" Association="Self.unidad_material_ibfk_1">
+    <AssociationSet Name="material_unidad_material" Association="Self.material_unidad_material">
       <End Role="material" EntitySet="material" />
       <End Role="unidad_material" EntitySet="unidad_material" />
     </AssociationSet>
-    <AssociationSet Name="reserva_ibfk_1" Association="Self.reserva_ibfk_1">
+    <AssociationSet Name="persona_reserva" Association="Self.persona_reserva">
       <End Role="persona" EntitySet="persona" />
       <End Role="reserva" EntitySet="reserva" />
     </AssociationSet>
-    <AssociationSet Name="tecnico_ibfk_1" Association="Self.tecnico_ibfk_1">
+    <AssociationSet Name="persona_tecnico" Association="Self.persona_tecnico">
       <End Role="persona" EntitySet="persona" />
       <End Role="tecnico" EntitySet="tecnico" />
     </AssociationSet>
-    <AssociationSet Name="usuario_ibfk_1" Association="Self.usuario_ibfk_1">
+    <AssociationSet Name="persona_usuario" Association="Self.persona_usuario">
       <End Role="persona" EntitySet="persona" />
       <End Role="usuario" EntitySet="usuario" />
     </AssociationSet>
-    <AssociationSet Name="privilegio_ibfk_1" Association="Self.privilegio_ibfk_1">
+    <AssociationSet Name="rol_privilegio" Association="Self.rol_privilegio">
       <End Role="rol" EntitySet="rol" />
       <End Role="privilegio" EntitySet="privilegio" />
     </AssociationSet>
-    <AssociationSet Name="tecnico_area_ibfk_1" Association="Self.tecnico_area_ibfk_1">
+    <AssociationSet Name="tecnico_tecnico_area" Association="Self.tecnico_tecnico_area">
       <End Role="tecnico" EntitySet="tecnico" />
       <End Role="tecnico_area" EntitySet="tecnico_area" />
     </AssociationSet>
-    <AssociationSet Name="tecnico_area_ibfk_2" Association="Self.tecnico_area_ibfk_2">
+    <AssociationSet Name="tipo_servicio_tecnico_area" Association="Self.tipo_servicio_tecnico_area">
       <End Role="tipo_servicio" EntitySet="tipo_servicio" />
       <End Role="tecnico_area" EntitySet="tecnico_area" />
     </AssociationSet>

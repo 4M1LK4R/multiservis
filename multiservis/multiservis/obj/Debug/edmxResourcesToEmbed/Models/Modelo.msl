@@ -170,6 +170,7 @@
       <EntityTypeMapping TypeName="multiservisModel.tecnico">
         <MappingFragment StoreEntitySet="tecnico">
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ruta_imagen" ColumnName="ruta_imagen" />
           <ScalarProperty Name="persona" ColumnName="persona" />
           <ScalarProperty Name="nro_seguro" ColumnName="nro_seguro" />
           <ScalarProperty Name="salario" ColumnName="salario" />

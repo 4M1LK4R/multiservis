@@ -103,6 +103,7 @@ create table asignar_rol_usuario(
 
 create table tecnico(
   id int auto_increment not null primary key,
+  ruta_imagen varchar(max),
   persona int not null,
   nro_seguro int not null,
   salario decimal(8,2) not null,

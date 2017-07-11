@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using multiservis.Models;
+using System.IO;
 
 namespace multiservis.Controllers
 {
@@ -20,6 +21,7 @@ namespace multiservis.Controllers
             cadena = "<table id='data' class='display highlight' cellspacing='0' hidden>";
             cadena += "<thead class='red darken-3 white-text z-depth-3'>";
             cadena += "<tr>";
+            cadena += "<th>Fotografía</th>";
             cadena += "<th>Nombres</th>";
             cadena += "<th>Paterno</th>";
             cadena += "<th>Materno</th>";
@@ -32,6 +34,7 @@ namespace multiservis.Controllers
             foreach (var obj in BD.tecnico.ToList())
             {
                 cadena += "<tr>";
+                cadena += "<td><img class='responsive-img' src='" + obj.ruta_imagen+ "'></td>";
                 cadena += "<td>" + obj.persona1.nombres + "</td>";
                 cadena += "<td>" + obj.persona1.paterno + "</td>";
                 cadena += "<td>" + obj.persona1.materno + "</td>";
@@ -54,7 +57,7 @@ namespace multiservis.Controllers
             cadena += "</table>";
             return Json(cadena, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Guardar(int id,string nombres,string parterno,string materno,string correo, string nacionalidad, string ci, string telefono,string direccion, string nro_seguro,string salario, string fecha_inscripcion, bool estado)
+        public ActionResult Guardar(int id, string nombres, string parterno, string materno, string correo, string nacionalidad, string ci, string telefono, string direccion, string nro_seguro, string salario, string fecha_inscripcion, bool estado)
         {
             persona obj_p;
             tecnico obj_t;
@@ -101,6 +104,8 @@ namespace multiservis.Controllers
                     obj_t.estado = estado;
                     BD.tecnico.Add(obj_t);
                     BD.SaveChanges();
+                    var resp1 = new { check = true, msg = error , id = obj_t.id};
+                    return Json(resp1, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -121,16 +126,20 @@ namespace multiservis.Controllers
                     obj_p.direccion = direccion;
 
                     BD.SaveChanges();
+                    var resp2 = new { check = true, msg = error, id = obj_t.id};
+                    return Json(resp2, JsonRequestBehavior.AllowGet);
+
                 }
             }
-
-            return Json(error, JsonRequestBehavior.AllowGet);
+            var resp = new { check = false, msg = error };
+            return Json(resp, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Get(int id)
         {
             tecnico obj = BD.tecnico.Single(o => o.id == id);
             var tecnico = new
             {
+                ruta_img = obj.ruta_imagen,
                 nombres = obj.persona1.nombres,
                 paterno = obj.persona1.paterno,
                 materno = obj.persona1.materno,
@@ -171,10 +180,34 @@ namespace multiservis.Controllers
             cadena += "<option value='' disabled selected>(Seleccionar)</option>";
             foreach (var item in BD.tecnico.ToList())
             {
-                cadena += "<option value=" + item.id + ">" + item.persona1.nombres +" | C.I.:"+item.persona1.ci + "</option>";
+                cadena += "<option value=" + item.id + ">" + item.persona1.nombres + " | C.I.:" + item.persona1.ci + "</option>";
             }
             cadena += "</select>";
             return Json(cadena, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public void SubirImagen(int id_img)
+        {
+            tecnico tec = BD.tecnico.Single(o => o.id == id_img);
+
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                var file = Request.Files[i];
+
+                var fileName = Path.GetFileName(file.FileName);
+
+                fileName = id_img+"_"+tec.persona1.nombres + "_" + tec.persona1.paterno + fileName.Substring(fileName.LastIndexOf("."));
+
+                var path = Path.Combine(Server.MapPath("~/Resources/images/tecnicos/"), fileName);
+
+                tec.ruta_imagen = "../Resources/images/tecnicos/"+ fileName;
+
+                BD.SaveChanges();
+                file.SaveAs(path);
+            }
+
+        }
+
     }
 }

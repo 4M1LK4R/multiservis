@@ -22,6 +22,7 @@ namespace multiservis.Models
         }
     
         public int id { get; set; }
+        public string ruta_imagen { get; set; }
         public int persona { get; set; }
         public int nro_seguro { get; set; }
         public decimal salario { get; set; }

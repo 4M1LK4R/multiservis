@@ -1,7 +1,7 @@
 use master;
-go;
+
 create database multiservis;
-go;
+
 use multiservis;
 
 create table area(
@@ -15,7 +15,7 @@ id int identity(1,1) not null primary key,
 area int not null,
 nombre varchar (50)not null,
 estado bit not null,
-index area_servicio
+constraint area_servicio
     foreign key(area)
     references area(id)
 );
@@ -37,7 +37,7 @@ id int identity(1,1) not null primary key,
 rol int not null,
 nombre varchar(50) not null,
 estado bit not null,
-index rol_privilegio
+constraint rol_privilegio
     foreign key(rol)
     references rol(id)
 );
@@ -61,7 +61,7 @@ create table telefono(
   tipo varchar(50) not null,
   numero int not null,
   estado bit not null,
-  index persona_telefono(persona),
+  constraint persona_telefono(persona),
       foreign key(persona)
       references persona(id)
 );
@@ -74,7 +74,7 @@ create table direccion(
   barrio varchar(50) not null,
   calle varchar(50)not null,
   estado bit not null,
-  index persona_direccion(persona),
+  constraint persona_direccion(persona),
       foreign key(persona)
       references persona(id)
 );*/
@@ -85,7 +85,7 @@ create table usuario(
     nombre_usuario varchar(50) not null,
     pasword_usuario varchar(50) not null,
     estado bit not null,
-    index persona_usuario
+    constraint persona_usuario
       foreign key(persona)
       references persona(id)
 );
@@ -96,22 +96,23 @@ create table asignar_rol_usuario(
     usuario int not null,
     fecha_asigna date not null,
     estado bit not null,
-    index rol_asignar_rol_usuario
+    constraint rol_asignar_rol_usuario
         foreign key (rol)
         references rol(id),
-    index usuario_asignar_rol_usuario
+    constraint usuario_asignar_rol_usuario
         foreign key (usuario)
         references usuario(id)
 );
 
 create table tecnico(
   id int identity(1,1) not null primary key,
+  ruta_imagen varchar(max),
   persona int not null,
   nro_seguro int not null,
   salario decimal(8,2) not null,
   fecha_inscripcion date not null,
   estado bit not null,
-  index persona_tecnico
+  constraint persona_tecnico
       foreign key(persona)
       references persona(id)
 );
@@ -124,10 +125,10 @@ create table tecnico_area(
     especialidad varchar(50) not null,
     nivel varchar(50) not null,
     estado bit not null,
-    index tecnico_tecnico_area
+    constraint tecnico_tecnico_area
         foreign key(tecnico)
         references tecnico(id),
-    index tipo_servicio_tecnico_area
+    constraint tipo_servicio_tecnico_area
         foreign key(tipo_servicio)
         references tipo_servicio(id)        
 );
@@ -143,7 +144,7 @@ create table unidad_material(
     precio_venta decimal(8,2) not null,
     fecha_ingreso date not null,
     estado bit not null,
-    index material_unidad_material
+    constraint material_unidad_material
         foreign key(material)
         references material(id)
 );
@@ -159,7 +160,7 @@ create table unidad_herramienta(
     precio_venta decimal(8,2) not null,
     fecha_ingreso date not null,
     estado bit not null,
-    index herramienta_unidad_herramienta
+    constraint herramienta_unidad_herramienta
         foreign key(herramienta)
         references herramienta(id)
 );
@@ -171,7 +172,7 @@ create table detalle_servicio(
     precio decimal(8,2) not null,
     tiempo varchar(50) not null,
     estado bit not null,
-    index servicio_detalle_servicio
+    constraint servicio_detalle_servicio
         foreign key(servicio)
         references servicio(id)
 );
@@ -182,7 +183,7 @@ create table reserva(
     usuario int,
     monto_total decimal(8,2),
     estado bit not null,
-    index persona_reserva
+    constraint persona_reserva
         foreign key(persona)
         references persona(id)
 );
@@ -196,13 +197,13 @@ create table detalle_reserva(
     precio decimal(8,2),
     descripcion varchar(50),
     estado bit not null,
-    index reserva_detalle_reserva
+    constraint reserva_detalle_reserva
         foreign key(reserva)
         references reserva(id),
-    index detalle_servicio_detalle_reserva
+    constraint detalle_servicio_detalle_reserva
         foreign key(detalle_servicio)
         references detalle_servicio(id),
-    index tecnico_detalle_reserva
+    constraint tecnico_detalle_reserva
         foreign key(tecnico)
         references tecnico(id)     
 );
@@ -213,7 +214,7 @@ create table control(
     fecha_fin date,
     observacion varchar(50),
     estado bit not null,
-    index detalle_reserva_control
+    constraint detalle_reserva_control
         foreign key(detalle_reserva)
         references detalle_reserva(id)
 );
@@ -225,7 +226,7 @@ create table ficha_tecnica(
     nro_ficha int,
     descripcion_problema varchar(90),
     hora int,
-    index detalle_reserva_ficha_tecnica
+    constraint detalle_reserva_ficha_tecnica
         foreign key(detalle_reserva)
         references detalle_reserva(id)
 );
@@ -236,10 +237,10 @@ create table detalle_ficha_material(
     unidad_material int,
     cantidad int,
     estado bit not null,
-    index ficha_tecnica_detalle_ficha_material
+    constraint ficha_tecnica_detalle_ficha_material
         foreign key(ficha_tecnica)
         references ficha_tecnica(id),
-    index unidad_material_detalle_ficha_material
+    constraint unidad_material_detalle_ficha_material
         foreign key(unidad_material)
         references unidad_material(id)
 );
@@ -250,10 +251,10 @@ create table detalle_ficha_herramienta(
     unidad_herramienta int,
     cantidad int,
     estado bit not null,
-    index ficha_tecnica_detalle_ficha_herramienta
+    constraint ficha_tecnica_detalle_ficha_herramienta
         foreign key(ficha_tecnica)
         references ficha_tecnica(id),
-    index unidad_herramienta_detalle_ficha_herramienta
+    constraint unidad_herramienta_detalle_ficha_herramienta
         foreign key(unidad_herramienta)
         references unidad_herramienta(id)    
 );

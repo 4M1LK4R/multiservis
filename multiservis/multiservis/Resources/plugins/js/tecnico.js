@@ -70,7 +70,56 @@ function EvaluarVacios() {
         return true;
     }
 };
+
+
+////Para la Imagen
+//var contents;
+//function readSingleFile(evt) {
+//    //Retrieve the first (and only!) File from the FileList object
+//    var f = evt.target.files[0];
+
+//    if (f) {
+//        var r = new FileReader();
+//        r.onload = function (e) {
+//            contents = e.target.result;
+
+//            //alert("Got the file.n"
+//            //      + "name: " + f.name + "n"
+//            //      + "type: " + f.type + "n"
+//            //      + "size: " + f.size + " bytesn"
+//            //      + "contents:" + contents
+//            //     );
+//        }
+//        r.readAsText(f);
+//    } else {
+//        alert("Failed to load file");
+//    }
+//}
+
+//document.getElementById('img').addEventListener('change', readSingleFile, false);
+
+
+
+//Para la Imagen
+var reader = new FileReader();
+
+function vistaPrevia(input) {
+    if (input.files && input.files[0]) {
+        //var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#img_prev').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#file_img").change(function () {
+    vistaPrevia(this);
+});
+
 function Guardar() {
+
+
     var o = {
         id: $('#id').val(),
         nombres: $('#nombres').val(),
@@ -85,16 +134,23 @@ function Guardar() {
         salario: $('#salario').val(),
         fecha_inscripcion: $('#fecha_inscripcion').val(),
         estado: est
-    };    
-    $.getJSON("/Tecnico/Guardar", o, function (e) {
-        if (e != "") {
-            Materialize.toast(e, 8000);
-        }
-        else {
+    };
+    $.getJSON("/Tecnico/Guardar", o, function (r) {
+
+        console.log(r);
+
+        if (r.check) {
+
+
+            SubirImagen(r.id);
+
             Materialize.toast('Registro exitoso!', 8000);
             LimpiarCampos();
             $('#modalDatos').modal('close');
             Listar();
+        }
+        else {
+            Materialize.toast(r.msg, 8000);
         }
     });
     Listar();
@@ -117,6 +173,11 @@ function Editar(id) {
         $('#salario').val(obj.salario);
         $('#fecha_inscripcion').val(obj.fecha_inscripcion);
         $('select').material_select();
+
+        $('#img_prev').attr('src', obj.ruta_img);
+        
+
+
         est = obj.estado;
         CargarEstadoEnChck(est);
         Materialize.updateTextFields();
@@ -173,3 +234,28 @@ function Eliminar(id) {
         Listar();
     });
 };
+
+
+function SubirImagen(id) {
+    var formData = new FormData();
+    var totalFiles = document.getElementById("file_img").files.length;
+    for (var i = 0; i < totalFiles; i++) {
+        var file = document.getElementById("file_img").files[i];
+        formData.append("file_img", file);
+        formData.append('id_img', id);
+    }
+    $.ajax({
+        type: "POST",
+        url: '/Tecnico/SubirImagen',
+        data: formData,
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+    });
+};
+
+
+$(document).ready(function () {
+    $("#Upload").click(function () {
+    });
+});
