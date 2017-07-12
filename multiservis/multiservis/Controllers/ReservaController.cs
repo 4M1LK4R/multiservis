@@ -55,6 +55,7 @@ namespace multiservis.Controllers
 
                     obj.persona = null;
                     obj.usuario = null;
+                    obj.fecha = DateTime.Now.Date;
                     obj.monto_total = Convert.ToDecimal(monto_total);
                     obj.estado = estado;
                     BD.reserva.Add(obj);

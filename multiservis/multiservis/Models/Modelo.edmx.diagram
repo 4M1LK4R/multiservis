@@ -4,49 +4,49 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="03e185e290c74c1286f9f878273eefeb" Name="Diagram1">
+      <Diagram DiagramId="d3a3e3969af04bc8b89365bc944cef82" Name="Diagram1">
         <EntityTypeShape EntityType="multiservisModel.area" Width="1.5" PointX="1.5" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="multiservisModel.asignar_rol_usuario" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="multiservisModel.asignar_rol_usuario" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.control" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.detalle_ficha_herramienta" Width="1.5" PointX="9.75" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.detalle_ficha_material" Width="1.5" PointX="12.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="multiservisModel.detalle_reserva" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="multiservisModel.detalle_reserva" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.detalle_servicio" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.ficha_tecnica" Width="1.5" PointX="7.5" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.herramienta" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.material" Width="1.5" PointX="8.25" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.persona" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="multiservisModel.privilegio" Width="1.5" PointX="5.25" PointY="21" IsExpanded="true" />
-        <EntityTypeShape EntityType="multiservisModel.reserva" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="multiservisModel.rol" Width="1.5" PointX="3" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="multiservisModel.privilegio" Width="1.5" PointX="5.25" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="multiservisModel.reserva" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="multiservisModel.rol" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.servicio" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="multiservisModel.tecnico" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="multiservisModel.tecnico" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.tecnico_area" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.tipo_servicio" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.unidad_herramienta" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="multiservisModel.unidad_material" Width="1.5" PointX="10.5" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="multiservisModel.usuario" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
-        <AssociationConnector Association="multiservisModel.area_servicio" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.rol_asignar_rol_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.usuario_asignar_rol_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.detalle_reserva_control" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.ficha_tecnica_detalle_ficha_herramienta" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.unidad_herramienta_detalle_ficha_herramienta" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.ficha_tecnica_detalle_ficha_material" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.unidad_material_detalle_ficha_material" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.detalle_reserva_ficha_tecnica" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.detalle_servicio_detalle_reserva" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.reserva_detalle_reserva" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.tecnico_detalle_reserva" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.servicio_detalle_servicio" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.herramienta_unidad_herramienta" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.material_unidad_material" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.persona_reserva" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.persona_tecnico" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.persona_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.rol_privilegio" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.tecnico_tecnico_area" ManuallyRouted="false" />
-        <AssociationConnector Association="multiservisModel.tipo_servicio_tecnico_area" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="multiservisModel.usuario" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <AssociationConnector Association="multiservisModel.servicio_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.asignar_rol_usuario_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.asignar_rol_usuario_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.control_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.detalle_ficha_herramienta_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.detalle_ficha_herramienta_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.detalle_ficha_material_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.detalle_ficha_material_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.detalle_reserva_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.detalle_reserva_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.detalle_reserva_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.ficha_tecnica_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.detalle_servicio_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.unidad_herramienta_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.unidad_material_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.reserva_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.tecnico_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.usuario_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.privilegio_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.tecnico_area_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="multiservisModel.tecnico_area_ibfk_2" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

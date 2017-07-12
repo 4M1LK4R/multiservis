@@ -179,6 +179,7 @@ create table detalle_servicio(
 
 create table reserva(
     id int identity(1,1) not null primary key,
+    fecha date,
     persona int,
     usuario int,
     monto_total decimal(8,2),
@@ -195,6 +196,7 @@ create table detalle_reserva(
     tecnico int,
     usuario int,
     precio decimal(8,2),
+    progreso varchar(20),
     descripcion varchar(50),
     estado bit not null,
     constraint reserva_detalle_reserva

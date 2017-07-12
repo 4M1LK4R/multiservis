@@ -57,6 +57,7 @@ function EvaluarVacios() {
 function Guardar() {
     var o = {
         id: $('#id').val(),
+        progreso: $('#progreso').val(),
         tecnico: $('#selectTecnico').val(),
         estado: est
     };
@@ -79,6 +80,7 @@ function Editar(id) {
         var codigo = '<p class="red-text text-darken-3 flow-text">ASIGNAR TECNICO</p>';
         $('#cabeceraModal').html(codigo);
         $('#id').val(id);
+        $('#progreso').val(obj.progreso);
         $('#selectTecnico').val(obj.tecnico_id);
 
         var codigo = '<p><b>Codigo Reserva</b>:&nbsp;' + obj.reserva + '</p>';
@@ -109,9 +111,10 @@ function Editar(id) {
 };
 
 function LimpiarCampos() {
-    $('#id').val(0),
-    $('#selectTecnico').val(''),
+    $('#id').val(0);
+    $('#selectTecnico').val('');
     $('#selectTipoServicio').val(''),
+    $('#progreso').val(''),
     $('#fecha').val(''),
     $('#especialidad').val(''),
     $('#nivel').val(''),

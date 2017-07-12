@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="multiservisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="multiservisModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="area">
     <Key>
       <PropertyRef Name="id" />
@@ -59,6 +59,7 @@
     <Property Name="tecnico" Type="int" />
     <Property Name="usuario" Type="int" />
     <Property Name="precio" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="progreso" Type="varchar" MaxLength="20" />
     <Property Name="descripcion" Type="varchar" MaxLength="50" />
     <Property Name="estado" Type="bit" Nullable="false" />
   </EntityType>
@@ -128,6 +129,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha" Type="date" />
     <Property Name="persona" Type="int" />
     <Property Name="usuario" Type="int" />
     <Property Name="monto_total" Type="decimal" Precision="8" Scale="2" />
@@ -155,7 +157,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ruta_imagen" Type="varchar(max)" />
+    <Property Name="ruta_imagen" Type="varchar" MaxLength="200" />
     <Property Name="persona" Type="int" Nullable="false" />
     <Property Name="nro_seguro" Type="int" Nullable="false" />
     <Property Name="salario" Type="decimal" Precision="8" Scale="2" Nullable="false" />
@@ -214,151 +216,7 @@
     <Property Name="pasword_usuario" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="estado" Type="bit" Nullable="false" />
   </EntityType>
-  <Association Name="area_servicio">
-    <End Role="area" Type="Self.area" Multiplicity="1" />
-    <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="area">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="servicio">
-        <PropertyRef Name="area" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="detalle_reserva_control">
-    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="1" />
-    <End Role="control" Type="Self.control" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="detalle_reserva">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="control">
-        <PropertyRef Name="detalle_reserva" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="detalle_reserva_ficha_tecnica">
-    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="0..1" />
-    <End Role="ficha_tecnica" Type="Self.ficha_tecnica" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="detalle_reserva">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="ficha_tecnica">
-        <PropertyRef Name="detalle_reserva" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="detalle_servicio_detalle_reserva">
-    <End Role="detalle_servicio" Type="Self.detalle_servicio" Multiplicity="0..1" />
-    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="detalle_servicio">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_reserva">
-        <PropertyRef Name="detalle_servicio" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ficha_tecnica_detalle_ficha_herramienta">
-    <End Role="ficha_tecnica" Type="Self.ficha_tecnica" Multiplicity="0..1" />
-    <End Role="detalle_ficha_herramienta" Type="Self.detalle_ficha_herramienta" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ficha_tecnica">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_ficha_herramienta">
-        <PropertyRef Name="ficha_tecnica" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ficha_tecnica_detalle_ficha_material">
-    <End Role="ficha_tecnica" Type="Self.ficha_tecnica" Multiplicity="0..1" />
-    <End Role="detalle_ficha_material" Type="Self.detalle_ficha_material" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ficha_tecnica">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_ficha_material">
-        <PropertyRef Name="ficha_tecnica" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="herramienta_unidad_herramienta">
-    <End Role="herramienta" Type="Self.herramienta" Multiplicity="1" />
-    <End Role="unidad_herramienta" Type="Self.unidad_herramienta" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="herramienta">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="unidad_herramienta">
-        <PropertyRef Name="herramienta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="material_unidad_material">
-    <End Role="material" Type="Self.material" Multiplicity="1" />
-    <End Role="unidad_material" Type="Self.unidad_material" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="material">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="unidad_material">
-        <PropertyRef Name="material" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="persona_reserva">
-    <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
-    <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="persona">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="reserva">
-        <PropertyRef Name="persona" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="persona_tecnico">
-    <End Role="persona" Type="Self.persona" Multiplicity="1" />
-    <End Role="tecnico" Type="Self.tecnico" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="persona">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="tecnico">
-        <PropertyRef Name="persona" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="persona_usuario">
-    <End Role="persona" Type="Self.persona" Multiplicity="1" />
-    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="persona">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="usuario">
-        <PropertyRef Name="persona" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="reserva_detalle_reserva">
-    <End Role="reserva" Type="Self.reserva" Multiplicity="0..1" />
-    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="reserva">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_reserva">
-        <PropertyRef Name="reserva" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="rol_asignar_rol_usuario">
+  <Association Name="asignar_rol_usuario_ibfk_1">
     <End Role="rol" Type="Self.rol" Multiplicity="1" />
     <End Role="asignar_rol_usuario" Type="Self.asignar_rol_usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -370,91 +228,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="rol_privilegio">
-    <End Role="rol" Type="Self.rol" Multiplicity="1" />
-    <End Role="privilegio" Type="Self.privilegio" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="rol">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="privilegio">
-        <PropertyRef Name="rol" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="servicio_detalle_servicio">
-    <End Role="servicio" Type="Self.servicio" Multiplicity="1" />
-    <End Role="detalle_servicio" Type="Self.detalle_servicio" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="servicio">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_servicio">
-        <PropertyRef Name="servicio" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="tecnico_detalle_reserva">
-    <End Role="tecnico" Type="Self.tecnico" Multiplicity="0..1" />
-    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tecnico">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_reserva">
-        <PropertyRef Name="tecnico" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="tecnico_tecnico_area">
-    <End Role="tecnico" Type="Self.tecnico" Multiplicity="1" />
-    <End Role="tecnico_area" Type="Self.tecnico_area" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tecnico">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="tecnico_area">
-        <PropertyRef Name="tecnico" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="tipo_servicio_tecnico_area">
-    <End Role="tipo_servicio" Type="Self.tipo_servicio" Multiplicity="1" />
-    <End Role="tecnico_area" Type="Self.tecnico_area" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tipo_servicio">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="tecnico_area">
-        <PropertyRef Name="tipo_servicio" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="unidad_herramienta_detalle_ficha_herramienta">
-    <End Role="unidad_herramienta" Type="Self.unidad_herramienta" Multiplicity="0..1" />
-    <End Role="detalle_ficha_herramienta" Type="Self.detalle_ficha_herramienta" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="unidad_herramienta">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_ficha_herramienta">
-        <PropertyRef Name="unidad_herramienta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="unidad_material_detalle_ficha_material">
-    <End Role="unidad_material" Type="Self.unidad_material" Multiplicity="0..1" />
-    <End Role="detalle_ficha_material" Type="Self.detalle_ficha_material" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="unidad_material">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_ficha_material">
-        <PropertyRef Name="unidad_material" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="usuario_asignar_rol_usuario">
+  <Association Name="asignar_rol_usuario_ibfk_2">
     <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
     <End Role="asignar_rol_usuario" Type="Self.asignar_rol_usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -466,111 +240,339 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="control_ibfk_1">
+    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="1" />
+    <End Role="control" Type="Self.control" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="detalle_reserva">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="control">
+        <PropertyRef Name="detalle_reserva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="detalle_ficha_herramienta_ibfk_1">
+    <End Role="ficha_tecnica" Type="Self.ficha_tecnica" Multiplicity="0..1" />
+    <End Role="detalle_ficha_herramienta" Type="Self.detalle_ficha_herramienta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ficha_tecnica">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_ficha_herramienta">
+        <PropertyRef Name="ficha_tecnica" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="detalle_ficha_herramienta_ibfk_2">
+    <End Role="unidad_herramienta" Type="Self.unidad_herramienta" Multiplicity="0..1" />
+    <End Role="detalle_ficha_herramienta" Type="Self.detalle_ficha_herramienta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unidad_herramienta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_ficha_herramienta">
+        <PropertyRef Name="unidad_herramienta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="detalle_ficha_material_ibfk_1">
+    <End Role="ficha_tecnica" Type="Self.ficha_tecnica" Multiplicity="0..1" />
+    <End Role="detalle_ficha_material" Type="Self.detalle_ficha_material" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ficha_tecnica">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_ficha_material">
+        <PropertyRef Name="ficha_tecnica" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="detalle_ficha_material_ibfk_2">
+    <End Role="unidad_material" Type="Self.unidad_material" Multiplicity="0..1" />
+    <End Role="detalle_ficha_material" Type="Self.detalle_ficha_material" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unidad_material">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_ficha_material">
+        <PropertyRef Name="unidad_material" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="detalle_reserva_ibfk_1">
+    <End Role="reserva" Type="Self.reserva" Multiplicity="0..1" />
+    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="reserva">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_reserva">
+        <PropertyRef Name="reserva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="detalle_reserva_ibfk_2">
+    <End Role="detalle_servicio" Type="Self.detalle_servicio" Multiplicity="0..1" />
+    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="detalle_servicio">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_reserva">
+        <PropertyRef Name="detalle_servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="detalle_reserva_ibfk_3">
+    <End Role="tecnico" Type="Self.tecnico" Multiplicity="0..1" />
+    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tecnico">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_reserva">
+        <PropertyRef Name="tecnico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="detalle_servicio_ibfk_1">
+    <End Role="servicio" Type="Self.servicio" Multiplicity="1" />
+    <End Role="detalle_servicio" Type="Self.detalle_servicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="servicio">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_servicio">
+        <PropertyRef Name="servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ficha_tecnica_ibfk_1">
+    <End Role="detalle_reserva" Type="Self.detalle_reserva" Multiplicity="0..1" />
+    <End Role="ficha_tecnica" Type="Self.ficha_tecnica" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="detalle_reserva">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ficha_tecnica">
+        <PropertyRef Name="detalle_reserva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="privilegio_ibfk_1">
+    <End Role="rol" Type="Self.rol" Multiplicity="1" />
+    <End Role="privilegio" Type="Self.privilegio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rol">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="privilegio">
+        <PropertyRef Name="rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="reserva_ibfk_1">
+    <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+    <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reserva">
+        <PropertyRef Name="persona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="servicio_ibfk_1">
+    <End Role="area" Type="Self.area" Multiplicity="1" />
+    <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="area">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="servicio">
+        <PropertyRef Name="area" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tecnico_area_ibfk_1">
+    <End Role="tecnico" Type="Self.tecnico" Multiplicity="1" />
+    <End Role="tecnico_area" Type="Self.tecnico_area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tecnico">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tecnico_area">
+        <PropertyRef Name="tecnico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tecnico_area_ibfk_2">
+    <End Role="tipo_servicio" Type="Self.tipo_servicio" Multiplicity="1" />
+    <End Role="tecnico_area" Type="Self.tecnico_area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_servicio">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tecnico_area">
+        <PropertyRef Name="tipo_servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tecnico_ibfk_1">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="tecnico" Type="Self.tecnico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tecnico">
+        <PropertyRef Name="persona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="unidad_herramienta_ibfk_1">
+    <End Role="herramienta" Type="Self.herramienta" Multiplicity="1" />
+    <End Role="unidad_herramienta" Type="Self.unidad_herramienta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="herramienta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="unidad_herramienta">
+        <PropertyRef Name="herramienta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="unidad_material_ibfk_1">
+    <End Role="material" Type="Self.material" Multiplicity="1" />
+    <End Role="unidad_material" Type="Self.unidad_material" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="material">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="unidad_material">
+        <PropertyRef Name="material" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="usuario_ibfk_1">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="usuario">
+        <PropertyRef Name="persona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="multiservisModelStoreContainer">
-    <EntitySet Name="area" EntityType="Self.area" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="asignar_rol_usuario" EntityType="Self.asignar_rol_usuario" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="control" EntityType="Self.control" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="detalle_ficha_herramienta" EntityType="Self.detalle_ficha_herramienta" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="detalle_ficha_material" EntityType="Self.detalle_ficha_material" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="detalle_reserva" EntityType="Self.detalle_reserva" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="detalle_servicio" EntityType="Self.detalle_servicio" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ficha_tecnica" EntityType="Self.ficha_tecnica" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="herramienta" EntityType="Self.herramienta" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="material" EntityType="Self.material" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="persona" EntityType="Self.persona" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="privilegio" EntityType="Self.privilegio" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="reserva" EntityType="Self.reserva" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="servicio" EntityType="Self.servicio" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tecnico" EntityType="Self.tecnico" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tecnico_area" EntityType="Self.tecnico_area" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tipo_servicio" EntityType="Self.tipo_servicio" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="unidad_herramienta" EntityType="Self.unidad_herramienta" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="unidad_material" EntityType="Self.unidad_material" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="area_servicio" Association="Self.area_servicio">
-      <End Role="area" EntitySet="area" />
-      <End Role="servicio" EntitySet="servicio" />
+    <EntitySet Name="area" EntityType="Self.area" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="asignar_rol_usuario" EntityType="Self.asignar_rol_usuario" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="control" EntityType="Self.control" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="detalle_ficha_herramienta" EntityType="Self.detalle_ficha_herramienta" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="detalle_ficha_material" EntityType="Self.detalle_ficha_material" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="detalle_reserva" EntityType="Self.detalle_reserva" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="detalle_servicio" EntityType="Self.detalle_servicio" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="ficha_tecnica" EntityType="Self.ficha_tecnica" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="herramienta" EntityType="Self.herramienta" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="material" EntityType="Self.material" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="persona" EntityType="Self.persona" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="privilegio" EntityType="Self.privilegio" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="reserva" EntityType="Self.reserva" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="rol" EntityType="Self.rol" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="servicio" EntityType="Self.servicio" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="tecnico" EntityType="Self.tecnico" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="tecnico_area" EntityType="Self.tecnico_area" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="tipo_servicio" EntityType="Self.tipo_servicio" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="unidad_herramienta" EntityType="Self.unidad_herramienta" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="unidad_material" EntityType="Self.unidad_material" Schema="multiservis" store:Type="Tables" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" Schema="multiservis" store:Type="Tables" />
+    <AssociationSet Name="asignar_rol_usuario_ibfk_1" Association="Self.asignar_rol_usuario_ibfk_1">
+      <End Role="rol" EntitySet="rol" />
+      <End Role="asignar_rol_usuario" EntitySet="asignar_rol_usuario" />
     </AssociationSet>
-    <AssociationSet Name="detalle_reserva_control" Association="Self.detalle_reserva_control">
+    <AssociationSet Name="asignar_rol_usuario_ibfk_2" Association="Self.asignar_rol_usuario_ibfk_2">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="asignar_rol_usuario" EntitySet="asignar_rol_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="control_ibfk_1" Association="Self.control_ibfk_1">
       <End Role="detalle_reserva" EntitySet="detalle_reserva" />
       <End Role="control" EntitySet="control" />
     </AssociationSet>
-    <AssociationSet Name="detalle_reserva_ficha_tecnica" Association="Self.detalle_reserva_ficha_tecnica">
-      <End Role="detalle_reserva" EntitySet="detalle_reserva" />
-      <End Role="ficha_tecnica" EntitySet="ficha_tecnica" />
-    </AssociationSet>
-    <AssociationSet Name="detalle_servicio_detalle_reserva" Association="Self.detalle_servicio_detalle_reserva">
-      <End Role="detalle_servicio" EntitySet="detalle_servicio" />
-      <End Role="detalle_reserva" EntitySet="detalle_reserva" />
-    </AssociationSet>
-    <AssociationSet Name="ficha_tecnica_detalle_ficha_herramienta" Association="Self.ficha_tecnica_detalle_ficha_herramienta">
+    <AssociationSet Name="detalle_ficha_herramienta_ibfk_1" Association="Self.detalle_ficha_herramienta_ibfk_1">
       <End Role="ficha_tecnica" EntitySet="ficha_tecnica" />
       <End Role="detalle_ficha_herramienta" EntitySet="detalle_ficha_herramienta" />
     </AssociationSet>
-    <AssociationSet Name="ficha_tecnica_detalle_ficha_material" Association="Self.ficha_tecnica_detalle_ficha_material">
+    <AssociationSet Name="detalle_ficha_herramienta_ibfk_2" Association="Self.detalle_ficha_herramienta_ibfk_2">
+      <End Role="unidad_herramienta" EntitySet="unidad_herramienta" />
+      <End Role="detalle_ficha_herramienta" EntitySet="detalle_ficha_herramienta" />
+    </AssociationSet>
+    <AssociationSet Name="detalle_ficha_material_ibfk_1" Association="Self.detalle_ficha_material_ibfk_1">
       <End Role="ficha_tecnica" EntitySet="ficha_tecnica" />
       <End Role="detalle_ficha_material" EntitySet="detalle_ficha_material" />
     </AssociationSet>
-    <AssociationSet Name="herramienta_unidad_herramienta" Association="Self.herramienta_unidad_herramienta">
-      <End Role="herramienta" EntitySet="herramienta" />
-      <End Role="unidad_herramienta" EntitySet="unidad_herramienta" />
-    </AssociationSet>
-    <AssociationSet Name="material_unidad_material" Association="Self.material_unidad_material">
-      <End Role="material" EntitySet="material" />
+    <AssociationSet Name="detalle_ficha_material_ibfk_2" Association="Self.detalle_ficha_material_ibfk_2">
       <End Role="unidad_material" EntitySet="unidad_material" />
+      <End Role="detalle_ficha_material" EntitySet="detalle_ficha_material" />
     </AssociationSet>
-    <AssociationSet Name="persona_reserva" Association="Self.persona_reserva">
-      <End Role="persona" EntitySet="persona" />
-      <End Role="reserva" EntitySet="reserva" />
-    </AssociationSet>
-    <AssociationSet Name="persona_tecnico" Association="Self.persona_tecnico">
-      <End Role="persona" EntitySet="persona" />
-      <End Role="tecnico" EntitySet="tecnico" />
-    </AssociationSet>
-    <AssociationSet Name="persona_usuario" Association="Self.persona_usuario">
-      <End Role="persona" EntitySet="persona" />
-      <End Role="usuario" EntitySet="usuario" />
-    </AssociationSet>
-    <AssociationSet Name="reserva_detalle_reserva" Association="Self.reserva_detalle_reserva">
+    <AssociationSet Name="detalle_reserva_ibfk_1" Association="Self.detalle_reserva_ibfk_1">
       <End Role="reserva" EntitySet="reserva" />
       <End Role="detalle_reserva" EntitySet="detalle_reserva" />
     </AssociationSet>
-    <AssociationSet Name="rol_asignar_rol_usuario" Association="Self.rol_asignar_rol_usuario">
-      <End Role="rol" EntitySet="rol" />
-      <End Role="asignar_rol_usuario" EntitySet="asignar_rol_usuario" />
+    <AssociationSet Name="detalle_reserva_ibfk_2" Association="Self.detalle_reserva_ibfk_2">
+      <End Role="detalle_servicio" EntitySet="detalle_servicio" />
+      <End Role="detalle_reserva" EntitySet="detalle_reserva" />
     </AssociationSet>
-    <AssociationSet Name="rol_privilegio" Association="Self.rol_privilegio">
-      <End Role="rol" EntitySet="rol" />
-      <End Role="privilegio" EntitySet="privilegio" />
+    <AssociationSet Name="detalle_reserva_ibfk_3" Association="Self.detalle_reserva_ibfk_3">
+      <End Role="tecnico" EntitySet="tecnico" />
+      <End Role="detalle_reserva" EntitySet="detalle_reserva" />
     </AssociationSet>
-    <AssociationSet Name="servicio_detalle_servicio" Association="Self.servicio_detalle_servicio">
+    <AssociationSet Name="detalle_servicio_ibfk_1" Association="Self.detalle_servicio_ibfk_1">
       <End Role="servicio" EntitySet="servicio" />
       <End Role="detalle_servicio" EntitySet="detalle_servicio" />
     </AssociationSet>
-    <AssociationSet Name="tecnico_detalle_reserva" Association="Self.tecnico_detalle_reserva">
-      <End Role="tecnico" EntitySet="tecnico" />
+    <AssociationSet Name="ficha_tecnica_ibfk_1" Association="Self.ficha_tecnica_ibfk_1">
       <End Role="detalle_reserva" EntitySet="detalle_reserva" />
+      <End Role="ficha_tecnica" EntitySet="ficha_tecnica" />
     </AssociationSet>
-    <AssociationSet Name="tecnico_tecnico_area" Association="Self.tecnico_tecnico_area">
+    <AssociationSet Name="privilegio_ibfk_1" Association="Self.privilegio_ibfk_1">
+      <End Role="rol" EntitySet="rol" />
+      <End Role="privilegio" EntitySet="privilegio" />
+    </AssociationSet>
+    <AssociationSet Name="reserva_ibfk_1" Association="Self.reserva_ibfk_1">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="reserva" EntitySet="reserva" />
+    </AssociationSet>
+    <AssociationSet Name="servicio_ibfk_1" Association="Self.servicio_ibfk_1">
+      <End Role="area" EntitySet="area" />
+      <End Role="servicio" EntitySet="servicio" />
+    </AssociationSet>
+    <AssociationSet Name="tecnico_area_ibfk_1" Association="Self.tecnico_area_ibfk_1">
       <End Role="tecnico" EntitySet="tecnico" />
       <End Role="tecnico_area" EntitySet="tecnico_area" />
     </AssociationSet>
-    <AssociationSet Name="tipo_servicio_tecnico_area" Association="Self.tipo_servicio_tecnico_area">
+    <AssociationSet Name="tecnico_area_ibfk_2" Association="Self.tecnico_area_ibfk_2">
       <End Role="tipo_servicio" EntitySet="tipo_servicio" />
       <End Role="tecnico_area" EntitySet="tecnico_area" />
     </AssociationSet>
-    <AssociationSet Name="unidad_herramienta_detalle_ficha_herramienta" Association="Self.unidad_herramienta_detalle_ficha_herramienta">
+    <AssociationSet Name="tecnico_ibfk_1" Association="Self.tecnico_ibfk_1">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="tecnico" EntitySet="tecnico" />
+    </AssociationSet>
+    <AssociationSet Name="unidad_herramienta_ibfk_1" Association="Self.unidad_herramienta_ibfk_1">
+      <End Role="herramienta" EntitySet="herramienta" />
       <End Role="unidad_herramienta" EntitySet="unidad_herramienta" />
-      <End Role="detalle_ficha_herramienta" EntitySet="detalle_ficha_herramienta" />
     </AssociationSet>
-    <AssociationSet Name="unidad_material_detalle_ficha_material" Association="Self.unidad_material_detalle_ficha_material">
+    <AssociationSet Name="unidad_material_ibfk_1" Association="Self.unidad_material_ibfk_1">
+      <End Role="material" EntitySet="material" />
       <End Role="unidad_material" EntitySet="unidad_material" />
-      <End Role="detalle_ficha_material" EntitySet="detalle_ficha_material" />
     </AssociationSet>
-    <AssociationSet Name="usuario_asignar_rol_usuario" Association="Self.usuario_asignar_rol_usuario">
+    <AssociationSet Name="usuario_ibfk_1" Association="Self.usuario_ibfk_1">
+      <End Role="persona" EntitySet="persona" />
       <End Role="usuario" EntitySet="usuario" />
-      <End Role="asignar_rol_usuario" EntitySet="asignar_rol_usuario" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

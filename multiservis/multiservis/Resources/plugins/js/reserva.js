@@ -13,13 +13,8 @@ function ListarDetalleServicio() {
     });
 };
 
-function CambiarPantalla() {
-    location.href = "/Reserva/CargarDetalle";
-};
-
 function Agregar(id, precio) {
     $('#btnGuardar').removeClass('disabled');;
-    console.log(precio.replace(/,/, "."));
     precio = parseFloat(precio.replace(",", "."));
     if (document.getElementById(id).checked) {
         //alert('checado');
@@ -40,8 +35,6 @@ function Agregar(id, precio) {
         $('#costoTotal').html(CostoTotal);
         $('#nro').html(arrayID.length);
     }
-    console.log(arrayID);
-    console.log(CostoTotal);
 };
 
 function Elimiar(id, array) {

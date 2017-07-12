@@ -23,6 +23,7 @@ namespace multiservis.Controllers
             cadena += "<th>COD Reserva</th>";
             cadena += "<th>Detalle de Servicio</th>";
             cadena += "<th>Descripcion</th>";
+            cadena += "<th>Progreso</th>";
             cadena += "<th>Tecnico</th>";
             cadena += "<th>Usuario</th>";
             cadena += "<th>Precio</th>";
@@ -37,7 +38,22 @@ namespace multiservis.Controllers
                 cadena += "<td>" + obj.reserva + "</td>";
                 cadena += "<td>" + obj.detalle_servicio1.nombre + "</td>";
                 cadena += "<td>" + obj.descripcion + "</td>";
-
+                if (obj.progreso== "pendiente")
+                {
+                    cadena += "<td class='red-text'>Pendiente</td>";
+                }
+                if (obj.progreso == "en_curso")
+                {
+                    cadena += "<td class='orange-text'>En Curso</td>";
+                }
+                if (obj.progreso == "concluido")
+                {
+                    cadena += "<td class='green-text'>Concluido</td>";
+                }
+                if (obj.progreso == null)
+                {
+                    cadena += "<td class='red-text'>Pendiente</td>";
+                }
                 if (obj.tecnico1 == null)
                 {
                     cadena += "<td class='red-text'>Pendiente</td>";
@@ -76,13 +92,14 @@ namespace multiservis.Controllers
             cadena += "</table>";
             return Json(cadena, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Guardar(int id, int tecnico, bool estado)
+        public ActionResult Guardar(int id,string progreso, int tecnico, bool estado)
         {
             detalle_reserva obj;
             string error = "";
             if (string.IsNullOrEmpty(error))
             {
                 obj = BD.detalle_reserva.Single(o => o.id == id);
+                obj.progreso = progreso;
                 obj.tecnico = tecnico;
                 obj.estado = estado;
                 BD.SaveChanges();
@@ -104,6 +121,7 @@ namespace multiservis.Controllers
                     tecnico = "",
                     usuario = "",
                     precio = obj.precio,
+                    progreso = obj.progreso,
                     descripcion = obj.descripcion,
                     estado = obj.estado
                 };

@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "Iniciar Secion";
+}
+
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col s12 m3 l3"></div>
+        <div class="col s12 m6 l6">
+            <div class="card white-text red-text text-darken-3">
+                <div class="card-content">
+                    <center>
+                        <span class="card-title">INICIAR SECIÓN</span>
+                        <img class="responsive-img" width="50%" src="~/Resources/images/multiservis.png">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="icon-user prefix"></i>
+                                <input id="correo" type="email" class="validate">
+                                <label for="correo">nombre de usuario</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="icon-lock prefix"></i>
+                                <input id="pass" type="password" class="validate">
+                                <label for="pass">Contraseña</label>
+                            </div>
+                            <a class="waves-effect waves-light btn btn-block red darken-3 btn-large"><i class="icon-login"></i>Ingresar</a>
+                        </div>
+                    </center>
+                </div>
+                <div class="card-action">
+                    <a href="#modalRegistro" class="grey-text">Registrarse</a>
+                    <a href="#" class="grey-text">¿Olvidaste tu contraseña?</a>
+                </div>
+                <!-- Modal Structure -->
+                <div id="modalRegistro" class="modal">
+                    <div class="modal-content">
+                        <center>
+                            <h4>Regístrate</h4>
+                            <div class="row">
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="icon-user prefix"></i>
+                                    <input id="nom_usu" type="text" class="validate">
+                                    <label for="nom_usu">Nombre de Usuario</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="icon-lock prefix"></i>
+                                    <input id="passRe" type="password" class="validate">
+                                    <label for="passRe">Contraseña</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="icon-user prefix"></i>
+                                    <input id="ci" type="text" class="validate">
+                                    <label for="ci">C.I.</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="icon-user prefix"></i>
+                                    <input id="nombreRe" type="text" class="validate">
+                                    <label for="nombreRe">Nombre(s)</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="icon-user prefix"></i>
+                                    <input id="apellidoRePa" type="text" class="validate">
+                                    <label for="apellidoRePa">Apellido Paterno</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="icon-user prefix"></i>
+                                    <input id="apellidoReMa" type="text" class="validate">
+                                    <label for="apellidoReMa">Apellido Materno</label>
+                                </div>
+                                <div class="col s12 m6 l6">
+                                    <div class="input-field col s12">
+                                        <p><i class="icon-globe"></i>Nacionalidad:</p>
+                                        <select id="nacionalidad">
+                                            <option value="" disabled selected>(Seleccionar nacionalidad)</option>
+                                            <option value="Argentina">Argentina
+                                            <option value="Bolivia">Bolivia</option>
+                                            <option value="Brasil">Brasil</option>
+                                            <option value="Chile">Chile</option>
+                                            <option value="Colombia">Colombia</option>
+                                            <option value="Costa Rica">Costa Rica</option>
+                                            <option value="Cuba">Cuba</option>
+                                            <option value="Ecuador">Ecuador</option>
+                                            <option value="El Salvador">El Salvador</option>
+                                            <option value="Guayana Francesa">Guayana Francesa</option>
+                                            <option value="Granada">Granada</option>
+                                            <option value="Guatemala">Guatemala</option>
+                                            <option value="Guayana">Guayana</option>
+                                            <option value="Haití">Haití</option>
+                                            <option value="Honduras">Honduras</option>
+                                            <option value="Jamaica">Jamaica</option>
+                                            <option value="México">México</option>
+                                            <option value="Nicaragua">Nicaragua</option>
+                                            <option value="Paraguay">Paraguay</option>
+                                            <option value="Panamá">Panamá</option>
+                                            <option value="Perú">Perú</option>
+                                            <option value="Puerto Rico">Puerto Rico</option>
+                                            <option value="República Dominicana">República Dominicana</option>
+                                            <option value="Surinam">Surinam</option>
+                                            <option value="Uruguay">Uruguay</option>
+                                            <option value="Venezuela">Venezuela</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="icon-mail prefix"></i>
+                                    <input id="correoRe" type="email" class="validate">
+                                    <label for="correoReMa">Correo</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="icon-phone prefix"></i>
+                                    <input id="telefonoRe" type="text" class="validate">
+                                    <label for="telefonoRe">Telefono</label>
+                                </div>
+                                <div class="input-field col s12 m6 l6">
+                                    <i class="icon-home prefix"></i>
+                                    <input id="direccionRe" type="text" class="validate">
+                                    <label for="direccionRe">Dirección</label>
+                                </div>
+                                @*<br><br><br>
+                                <hr> o con tu red social.
+                                <br><br>
+                                <div class="col s12 m12 l12">
+                                    <a class="waves-effect waves-light red btn"><i class="icon-gplus left"></i>GOOGLE</a>
+                                    <a class="waves-effect waves-light blue darken-4 btn"><i class="icon-facebook left"></i>FACEBOOK</a>
+                                </div>*@
+
+                            </div>
+                        </center>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat green white-text">Aceptar</a>
+                        <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat red white-text">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m3 l3"></div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/cuenta")
+}

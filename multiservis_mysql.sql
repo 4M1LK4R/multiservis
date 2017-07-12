@@ -103,7 +103,7 @@ create table asignar_rol_usuario(
 
 create table tecnico(
   id int auto_increment not null primary key,
-  ruta_imagen varchar(max),
+  ruta_imagen varchar(200),
   persona int not null,
   nro_seguro int not null,
   salario decimal(8,2) not null,
@@ -176,6 +176,7 @@ create table detalle_servicio(
 
 create table reserva(
     id int auto_increment not null primary key,
+    fecha date,
     persona int,
     usuario int,
     monto_total decimal(8,2),
@@ -192,6 +193,7 @@ create table detalle_reserva(
     tecnico int,
     usuario int,
     precio decimal(8,2),
+    progreso varchar(20),
     descripcion varchar(50),
     estado bit not null,
     index reserva_detalle_reserva(reserva),

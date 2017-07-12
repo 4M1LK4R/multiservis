@@ -73,28 +73,47 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <div class="collapsible-header"><i class="icon-user"></i>Cuenta</div>
+                    <div class="collapsible-body">
+                        <ul>
+
+                            <li><a class="red-text text-darken-3" href="/Cuenta/">Cuenta</a></li>
+                        </ul>
+                    </div>
+                </li>
+                @{
+                    multiservisEntities BD = new multiservisEntities();
+                    if (Request.IsAuthenticated)
+                    {
+
+                        @Html.Partial("_MenuAdmin")
+
+                    }
+                }
+
             </ul>
         </ul>
     </header>
     @*@{
-        oantarijaEntities BD = new oantarijaEntities();
-        if (Request.IsAuthenticated)
-        {
-            var usu = BD.usuario.Single(o => o.correo == User.Identity.Name);
-            if (usu.rol == 1)
+            oantarijaEntities BD = new oantarijaEntities();
+            if (Request.IsAuthenticated)
             {
-                @Html.Partial("_MenuAdmin")
+                var usu = BD.usuario.Single(o => o.correo == User.Identity.Name);
+                if (usu.rol == 1)
+                {
+                    @Html.Partial("_MenuAdmin")
+                }
+                if (usu.rol == 2)
+                {
+                    @Html.Partial("_MenuUser")
+                }
             }
-            if (usu.rol == 2)
+            else
             {
-                @Html.Partial("_MenuUser")
+                @Html.Partial("_MenuStandar")
             }
-        }
-        else
-        {
-            @Html.Partial("_MenuStandar")
-        }
-    }*@
+        }*@
     <main>
         @RenderBody()
     </main>

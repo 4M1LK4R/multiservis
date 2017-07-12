@@ -81,9 +81,12 @@ namespace multiservis
             ));
             bundles.Add(new ScriptBundle("~/bundles/adm_reserva").Include(
             "~/Resources/plugins/js/adm_reserva.js"
-            ));            
+            ));
             bundles.Add(new ScriptBundle("~/bundles/ficha_tecnica").Include(
             "~/Resources/plugins/js/ficha_tecnica.js"
+            ));
+            bundles.Add(new ScriptBundle("~/bundles/cuenta").Include(
+            "~/Resources/plugins/js/cuenta.js"
             ));
         }
     }

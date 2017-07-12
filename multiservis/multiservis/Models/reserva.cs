@@ -21,6 +21,7 @@ namespace multiservis.Models
         }
     
         public int id { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<int> persona { get; set; }
         public Nullable<int> usuario { get; set; }
         public Nullable<decimal> monto_total { get; set; }

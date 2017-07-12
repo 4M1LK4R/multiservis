@@ -181,6 +181,7 @@
     <Compile Include="Controllers\AdmReservaController.cs" />
     <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\AsignarRolUsuarioController.cs" />
+    <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\DetalleServicioController.cs" />
     <Compile Include="Controllers\FichaTecnicaController.cs" />
     <Compile Include="Controllers\HerramientaController.cs" />
@@ -314,6 +315,7 @@
     <Content Include="Resources\plugins\fontello\font\fontello.svg" />
     <Content Include="Resources\plugins\jquery\jquery-3.2.1.min.js" />
     <Content Include="Resources\plugins\jquery\jquery.numeric.js" />
+    <Content Include="Resources\plugins\js\cuenta.js" />
     <Content Include="Resources\plugins\js\herramienta.js" />
     <Content Include="Resources\plugins\js\privilegio.js" />
     <Content Include="Resources\plugins\js\reserva.js" />
@@ -419,6 +421,7 @@
       <DependentUpon>Modelo.edmx</DependentUpon>
     </Content>
     <None Include="Project_Readme.html" />
+    <Content Include="Views\Cuenta\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
