@@ -257,3 +257,8 @@ create table detalle_ficha_herramienta(
         foreign key(unidad_herramienta)
         references unidad_herramienta(id)    
 );
+
+INSERT INTO `rol` (`id`, `nombre`, `estado`) VALUES (NULL, 'administrador', b'1'), (NULL, 'estandar', b'1');
+INSERT INTO `persona` (`id`, `ci`, `nombres`, `paterno`, `materno`, `correo`, `nacionalidad`, `telefono`, `direccion`) VALUES (NULL, '1', 'admin', 'admin', 'admin', 'admin', 'admin', NULL, NULL);
+INSERT INTO `usuario` (`id`, `persona`, `nombre_usuario`, `pasword_usuario`, `estado`) VALUES ('1', '1', 'admin', 'admin', b'1');
+INSERT INTO `asignar_rol_usuario` (`id`, `rol`, `usuario`, `fecha_asigna`, `estado`) VALUES (NULL, '1', '1', '2017-07-13', b'1');

@@ -14,131 +14,168 @@
                         <span class="card-title">INICIAR SECIÓN</span>
                         <img class="responsive-img" width="50%" src="~/Resources/images/multiservis.png">
                         <div class="row">
-                            <div class="input-field col s12">
-                                <i class="icon-user prefix"></i>
-                                <input id="correo" type="email" class="validate">
-                                <label for="correo">nombre de usuario</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <i class="icon-lock prefix"></i>
-                                <input id="pass" type="password" class="validate">
-                                <label for="pass">Contraseña</label>
-                            </div>
-                            <a class="waves-effect waves-light btn btn-block red darken-3 btn-large"><i class="icon-login"></i>Ingresar</a>
+
+
+                            <form method="post" action="/Cuenta/Login">
+                                <div class="input-field col s12">
+                                    <i class="icon-user prefix"></i>
+                                    <input type="text" name="nik" id="nik" class="validate" />
+                                    <label for="nik">Nombre de Usuario</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <i class="icon-lock prefix"></i>
+                                    <input type="password" name="pass" id="pass" class="validate" />
+                                    <label for="pass">Contraseña</label>
+                                </div>
+
+                                <button class="waves-effect waves-light btn btn-block red darken-4 btn-large" type="submit">
+                                    Iniciar Sesión
+                                    <i class="icon-login"></i>
+                                </button>
+
+                            </form>
+
+
                         </div>
                     </center>
                 </div>
                 <div class="card-action">
                     <a href="#modalRegistro" class="grey-text">Registrarse</a>
                     <a href="#" class="grey-text">¿Olvidaste tu contraseña?</a>
-                </div>
-                <!-- Modal Structure -->
-                <div id="modalRegistro" class="modal">
-                    <div class="modal-content">
-                        <center>
-                            <h4>Regístrate</h4>
-                            <div class="row">
-                                <div class="input-field col s12 m6 l6">
-                                    <i class="icon-user prefix"></i>
-                                    <input id="nom_usu" type="text" class="validate">
-                                    <label for="nom_usu">Nombre de Usuario</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <i class="icon-lock prefix"></i>
-                                    <input id="passRe" type="password" class="validate">
-                                    <label for="passRe">Contraseña</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <i class="icon-user prefix"></i>
-                                    <input id="ci" type="text" class="validate">
-                                    <label for="ci">C.I.</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <i class="icon-user prefix"></i>
-                                    <input id="nombreRe" type="text" class="validate">
-                                    <label for="nombreRe">Nombre(s)</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <i class="icon-user prefix"></i>
-                                    <input id="apellidoRePa" type="text" class="validate">
-                                    <label for="apellidoRePa">Apellido Paterno</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <i class="icon-user prefix"></i>
-                                    <input id="apellidoReMa" type="text" class="validate">
-                                    <label for="apellidoReMa">Apellido Materno</label>
-                                </div>
-                                <div class="col s12 m6 l6">
-                                    <div class="input-field col s12">
-                                        <p><i class="icon-globe"></i>Nacionalidad:</p>
-                                        <select id="nacionalidad">
-                                            <option value="" disabled selected>(Seleccionar nacionalidad)</option>
-                                            <option value="Argentina">Argentina
-                                            <option value="Bolivia">Bolivia</option>
-                                            <option value="Brasil">Brasil</option>
-                                            <option value="Chile">Chile</option>
-                                            <option value="Colombia">Colombia</option>
-                                            <option value="Costa Rica">Costa Rica</option>
-                                            <option value="Cuba">Cuba</option>
-                                            <option value="Ecuador">Ecuador</option>
-                                            <option value="El Salvador">El Salvador</option>
-                                            <option value="Guayana Francesa">Guayana Francesa</option>
-                                            <option value="Granada">Granada</option>
-                                            <option value="Guatemala">Guatemala</option>
-                                            <option value="Guayana">Guayana</option>
-                                            <option value="Haití">Haití</option>
-                                            <option value="Honduras">Honduras</option>
-                                            <option value="Jamaica">Jamaica</option>
-                                            <option value="México">México</option>
-                                            <option value="Nicaragua">Nicaragua</option>
-                                            <option value="Paraguay">Paraguay</option>
-                                            <option value="Panamá">Panamá</option>
-                                            <option value="Perú">Perú</option>
-                                            <option value="Puerto Rico">Puerto Rico</option>
-                                            <option value="República Dominicana">República Dominicana</option>
-                                            <option value="Surinam">Surinam</option>
-                                            <option value="Uruguay">Uruguay</option>
-                                            <option value="Venezuela">Venezuela</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-
-                                <div class="input-field col s12 m6 l6">
-                                    <i class="icon-mail prefix"></i>
-                                    <input id="correoRe" type="email" class="validate">
-                                    <label for="correoReMa">Correo</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <i class="icon-phone prefix"></i>
-                                    <input id="telefonoRe" type="text" class="validate">
-                                    <label for="telefonoRe">Telefono</label>
-                                </div>
-                                <div class="input-field col s12 m6 l6">
-                                    <i class="icon-home prefix"></i>
-                                    <input id="direccionRe" type="text" class="validate">
-                                    <label for="direccionRe">Dirección</label>
-                                </div>
-                                @*<br><br><br>
-                                <hr> o con tu red social.
-                                <br><br>
-                                <div class="col s12 m12 l12">
-                                    <a class="waves-effect waves-light red btn"><i class="icon-gplus left"></i>GOOGLE</a>
-                                    <a class="waves-effect waves-light blue darken-4 btn"><i class="icon-facebook left"></i>FACEBOOK</a>
-                                </div>*@
-
-                            </div>
-                        </center>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat green white-text">Aceptar</a>
-                        <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat red white-text">Cancelar</a>
-                    </div>
-                </div>
+                </div>                
             </div>
         </div>
     </div>
-    <div class="col s12 m3 l3"></div>
+</div>
+<div class="col s12 m3 l3"></div>
+<div id="modalRegistro" class="modal">
+    <div class="modal-content">
+        <center>
+            <h4>Regístrate</h4>
+            <div class="row">
+                <input id="id" type="text" hidden value="0">
+                <div class="input-field col s12 m12 l12">
+                    <i class="icon-right-dir prefix"></i>
+                    <input id="nombres" type="text">
+                    <label for="nombres">Nombres</label>
+                </div>
+            </div>
+            <div class="row">
+                <input id="id" type="text" hidden value="0">
+                <div class="input-field col s12 m12 l12">
+                    <i class="icon-right-dir prefix"></i>
+                    <input id="paterno" type="text">
+                    <label for="paterno">Apellido Paterno</label>
+                </div>
+            </div>
+            <div class="row">
+                <input id="id" type="text" hidden value="0">
+                <div class="input-field col s12 m12 l12">
+                    <i class="icon-right-dir prefix"></i>
+                    <input id="materno" type="text">
+                    <label for="materno">Apellido Materno</label>
+                </div>
+            </div>
+            <div class="row">
+                <input id="id" type="text" hidden value="0">
+                <div class="input-field col s12 m12 l12">
+                    <i class="icon-right-dir prefix"></i>
+                    <input id="correo" type="email" class="validate">
+                    <label for="correo">Correo</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <div class="input-field col s12">
+                        <p><i class="icon-wrench"></i>Nacionalidad:</p>
+                        <select id="nacionalidad">
+                            <option value="" disabled selected>(Seleccionar nacionalidad)</option>
+                            <option value="Argentina">Argentina
+                            <option value="Bolivia">Bolivia</option>
+                            <option value="Brasil">Brasil</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Costa Rica">Costa Rica</option>
+                            <option value="Cuba">Cuba</option>
+                            <option value="Ecuador">Ecuador</option>
+                            <option value="El Salvador">El Salvador</option>
+                            <option value="Guayana Francesa">Guayana Francesa</option>
+                            <option value="Granada">Granada</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="Guayana">Guayana</option>
+                            <option value="Haití">Haití</option>
+                            <option value="Honduras">Honduras</option>
+                            <option value="Jamaica">Jamaica</option>
+                            <option value="México">México</option>
+                            <option value="Nicaragua">Nicaragua</option>
+                            <option value="Paraguay">Paraguay</option>
+                            <option value="Panamá">Panamá</option>
+                            <option value="Perú">Perú</option>
+                            <option value="Puerto Rico">Puerto Rico</option>
+                            <option value="República Dominicana">República Dominicana</option>
+                            <option value="Surinam">Surinam</option>
+                            <option value="Uruguay">Uruguay</option>
+                            <option value="Venezuela">Venezuela</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <input id="id" type="text" hidden value="0">
+                <div class="input-field col s12 m12 l12">
+                    <i class="icon-right-dir prefix"></i>
+                    <input id="ci" type="text">
+                    <label for="ci">C.I.</label>
+                </div>
+            </div>
+            <div class="row">
+                <input id="id" type="text" hidden value="0">
+                <div class="input-field col s12 m12 l12">
+                    <i class="icon-right-dir prefix"></i>
+                    <input id="telefono" type="text">
+                    <label for="telefono">Teléfono</label>
+                </div>
+            </div>
+            <div class="row">
+                <input id="id" type="text" hidden value="0">
+                <div class="input-field col s12 m12 l12">
+                    <i class="icon-right-dir prefix"></i>
+                    <input id="direccion" type="text">
+                    <label for="direccion">Dirección</label>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <input id="id" type="text" hidden value="0">
+                <div class="input-field col s12 m12 l12">
+                    <i class="icon-right-dir prefix"></i>
+                    <input id="nombre_usuario" type="text">
+                    <label for="nombre_usuario">Nombre de Usuario</label>
+                </div>
+            </div>
+            <div class="row">
+                <input id="id" type="text" hidden value="0">
+                <div class="input-field col s12 m12 l12">
+                    <i class="icon-right-dir prefix"></i>
+                    <input id="password_usuario" type="password">
+                    <label for="password_usuario">Contraseña</label>
+                </div>
+            </div>
+            @*<br><br><br>
+                <hr> o con tu red social.
+                <br><br>
+                <div class="col s12 m12 l12">
+                    <a class="waves-effect waves-light red btn"><i class="icon-gplus left"></i>GOOGLE</a>
+                    <a class="waves-effect waves-light blue darken-4 btn"><i class="icon-facebook left"></i>FACEBOOK</a>
+                </div>*@
+        </center>
+    </div>
+    <div class="modal-footer blue-grey darken-4">
+        <a id="aceptar" class="waves-effect waves-green btn-flat green white-text">Aceptar</a>
+        <a id="cancelar" class="modal-action modal-close waves-effect waves-red btn-flat red white-text">Cancelar</a>
+    </div>
 </div>
 
 
