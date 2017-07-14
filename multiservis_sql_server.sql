@@ -260,3 +260,7 @@ create table detalle_ficha_herramienta(
         foreign key(unidad_herramienta)
         references unidad_herramienta(id)    
 );
+INSERT INTO rol ( nombre, estado) VALUES ( 'administrador', 1), ( 'estandar', 1);
+INSERT INTO persona ( ci, nombres, paterno, materno, correo, nacionalidad, telefono, direccion) VALUES ( '1', 'admin', 'admin', 'admin', 'admin', 'admin', null, null);
+INSERT INTO usuario ( persona, nombre_usuario, pasword_usuario, estado) VALUES ( '1', 'admin', 'admin', 1);
+INSERT INTO asignar_rol_usuario ( rol, usuario, fecha_asigna, estado) VALUES ('1', '1', '2017-07-13', 1);
